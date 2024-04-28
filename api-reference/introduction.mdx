@@ -20,14 +20,44 @@ There are two ways to build API documentation: [OpenAPI](https://mintlify.com/do
   View the OpenAPI specification file
 </Card>
 
-## Authentication
+## GET /public/guests/list
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+### Authentication
+
+Include these following headers:
+
+X-API-APP-ID (you need to register your app, instructions below)
+
+X-API-SECRET-KEY (provided by center)
+
+X-API-PUBLIC-KEY (provided by center)
+
+#### Response
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+"guests": {
+  "firstName": string;
+  "lastName": string;
+  "startDate": Date;
+  "endDate": Date;
+  "role": 'patient' | 'guest'
+}[]
 ```
+
+## Create application
+
+### POST apps/register
+
+#### Body
+
+```json
+{
+"name": string;
+"email": string;
+}
+```
+
+
+#### Response
+
+As a response you will get your APP ID. Please save it for future use.
