@@ -1,0 +1,28 @@
+---
+title: 'New file'
+description: 'Description of your new file.'
+---
+
+## GET /public/guests/list
+
+### Authentication
+
+Include these following headers:
+
+X-API-APP-ID (you need to register your app, instructions below)
+
+X-API-SECRET-KEY (provided by center)
+
+X-API-PUBLIC-KEY (provided by center)
+
+#### Response
+
+```json
+"guests": {
+  "firstName": string;
+  "lastName": string;
+  "startDate": Date;
+  "endDate": Date;
+  "role": 'patient' | 'guest'
+}[]
+```
