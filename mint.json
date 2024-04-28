@@ -32,14 +32,10 @@
 		}
 	],
 	"anchors": [
-		{
-			"name": "Documentation",
-			"icon": "book-open-cover",
-			"url": "https://mintlify.com/docs"
-		},
+	
 		{
 			"name": "teamm.work",
-			"icon": "slack",
+			"icon": "work",
 			"url": "https://teamm.work"
 		},
 		{
@@ -49,33 +45,13 @@
 		}
 	],
 	"navigation": [
+
 		{
-			"group": "Get Started",
-			"pages": ["introduction", "quickstart", "development"]
-		},
-		{
-			"group": "Essentials",
-			"pages": [
-				"essentials/markdown",
-				"essentials/code",
-				"essentials/images",
-				"essentials/settings",
-				"essentials/navigation",
-				"essentials/reusable-snippets"
-			]
-		},
-		{
-			"group": "API Documentation",
-			"pages": ["api-reference/introduction"]
-		},
-		{
-			"group": "Endpoint Examples",
+			"group": "Endpoints",
 			"pages": [
 				
 				"api-reference/endpoint/get-guests"	,
-				"api-reference/endpoint/create-app",			"api-reference/endpoint/get",
-				"api-reference/endpoint/create",
-				"api-reference/endpoint/delete"
+				"api-reference/endpoint/create-app"			
 			]
 		}
 	],
