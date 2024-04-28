@@ -1,21 +1,26 @@
 ---
-title: 'Create application'
-description: 'Description of your new file.'
+title: 'POST /apps/register'
+description: 'Create an application that you can use for our public api.'
 ---
 
 
-### POST /apps/register
+### Body
 
-#### Body
+<ParamField path="name" type="string" required>
+ Name of your application
+</ParamField>
+<ParamField path="email" type="string" required>
+ Email of your application
+</ParamField>
 
 ```json
 {
-"name": string;
-"email": string;
+"name": "My awesome app";
+"email": "awesome.app@mail.com;
 }
 ```
 
 
-#### Response
+### Response
 
 As a response you will get your APP ID. Please save it for future use.
