@@ -49,6 +49,15 @@
 		}
 	],
 	"navigation": [
+          		{
+			"group": "Onboarding",
+			"pages": [
+				
+				"onboarding/fields-and-metas",
+        "introduction"
+						
+			]
+		},
 
 		{
 			"group": "Endpoints",
@@ -57,15 +66,8 @@
 				"api-reference/endpoint/get-guests"	,
 				"api-reference/endpoint/create-app"			
 			]
-		},
-        		{
-			"group": "Onboarding",
-			"pages": [
-				
-				"onboarding/fields-and-metas.mdx"
-						
-			]
 		}
+  
 
 	],
 	"footerSocials": {
