@@ -57,7 +57,16 @@
 				"api-reference/endpoint/get-guests"	,
 				"api-reference/endpoint/create-app"			
 			]
+		},
+        		{
+			"group": "Onboarding",
+			"pages": [
+				
+				"onboarding/fields-and-metas.mdx"
+						
+			]
 		}
+
 	],
 	"footerSocials": {
 		"x": "https://x.com/mintlify",
