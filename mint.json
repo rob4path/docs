@@ -27,6 +27,10 @@
 	},
 	"tabs": [
 		{
+			"name": "Essentials",
+			"url": "onboarding"
+		},
+		{
 			"name": "API Reference",
 			"url": "api-reference"
 		}
