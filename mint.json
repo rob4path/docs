@@ -18,16 +18,16 @@
 	"topbarLinks": [
 		{
 			"name": "Support",
-			"url": "mailto:hi@mintlify.com"
+			"url": "mailto:contact@teamm.com"
 		}
 	],
 	"topbarCtaButton": {
-		"name": "Dashboard",
-		"url": "https://dashboard.mintlify.com"
+		"name": "Home",
+		"url": "https://teamm.help"
 	},
 	"tabs": [
 		{
-			"name": "Essentials",
+			"name": "Onboarding",
 			"url": "onboarding"
 		},
 		{
@@ -36,7 +36,6 @@
 		}
 	],
 	"anchors": [
-	
 		{
 			"name": "teamm.work",
 			"icon": "work",
@@ -52,13 +51,10 @@
           		{
 			"group": "Onboarding",
 			"pages": [
-				
 				"onboarding/fields-and-metas",
-        "introduction"
-						
+        		"introduction"			
 			]
 		},
-
 		{
 			"group": "Endpoints",
 			"pages": [
@@ -67,12 +63,10 @@
 				"api-reference/endpoint/create-app"			
 			]
 		}
-  
 
 	],
 	"footerSocials": {
-		"x": "https://x.com/mintlify",
-		"github": "https://github.com/mintlify",
-		"linkedin": "https://www.linkedin.com/company/mintsearch"
+		"github": "https://github.com/techandfriends",
+		"website": "https://teamm.io/"
 	}
 }
