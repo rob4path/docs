@@ -1,5 +1,5 @@
 ---
-title: 'GET /public/guests'
+title: 'GET /guests'
 description: 'Get a filtered list of guests with advanced query options.'
 ---
 
@@ -100,7 +100,7 @@ Example:
 #### Example Request
 
 ```bash
-GET /public/guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&start=1&length=25&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
+GET /guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&start=1&length=25&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
 ```
 
 #### Response
