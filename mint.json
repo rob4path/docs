@@ -48,22 +48,25 @@
 		}
 	],
 	"navigation": [
-          		{
+		{
 			"group": "Onboarding",
+			"pages": ["onboarding/fields-and-metas", "introduction"]
+		},
+		{
+			"group": "API Reference",
 			"pages": [
-				"onboarding/fields-and-metas",
-        		"introduction"			
+				"api-reference/introduction",
+				"api-reference/authentication"
 			]
 		},
 		{
 			"group": "Endpoints",
 			"pages": [
-				
-				"api-reference/endpoint/get-guests"	,
-				"api-reference/endpoint/create-app"			
+				"api-reference/endpoint/get-guests",
+				"api-reference/endpoint/get-guests-list",
+				"api-reference/endpoint/create-app"
 			]
 		}
-
 	],
 	"footerSocials": {
 		"github": "https://github.com/techandfriends",

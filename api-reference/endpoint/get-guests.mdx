@@ -1,48 +1,105 @@
 ---
-title: "GET /public/guests/list"
-description: "Get a list of all the bookings."
+title: 'GET /public/guests'
+description: 'Get a filtered list of guests with advanced query options.'
 ---
 
 #### Authentication
 
-Include these following headers:
-
-<ParamField path="X-API-APP-ID" type="string" required>
-  The ID you received when you registered your application. See https://help.teamm.work/api-reference/endpoint/create-app for more info. 
-</ParamField>
-
-<ParamField path="X-API-SECRET-KEY" type="string" required>
-  The API secret key provided by center.
-</ParamField>
-
-<ParamField path="X-API-PUBLIC-KEY" type="string" required>
-  The API public key provided by center. 
-
-  ### Getting the Secret Keys
-
-  The keys provided by the center can be found in General Settings -\> Other Settings. On the top right there is a button leading to Api Secret Keys page. 
-
-  On the top right you will find the API Public Key. Next to it there is a button to create a new secret key for each app that wishes to connect to your center's account through the API. 
-</ParamField>
+This endpoint requires authentication. See [Authentication](/api-reference/authentication) for detailed information about required headers and how to obtain your API keys.
 
 #### Query Params
 
-<ParamField path="start" type="Date" required>
-  From date
+<ParamField path="startDate" type="Date" required>
+	Filter guests by start date (from this date)
 </ParamField>
 
-<ParamField path="end" type="Date" required>
-  To date
+<ParamField path="endDate" type="Date" required>
+	Filter guests by end date (to this date)
 </ParamField>
+
+<ParamField path="role" type="'patient' | 'companion' | 'guest'">
+	Filter guests by their role
+</ParamField>
+
+<ParamField
+	path="status"
+	type="'registered' | 'waitingList' | 'review' | 'confirmed' | 'arrived' | 'paid' | 'cancelled' | 'voided' | 'registeredOnline'"
+>
+	Filter guests by their booking status: - `registered` - Guest is registered
+	- `waitingList` - Guest is on waiting list - `review` - Booking is under
+	review - `confirmed` - Booking is confirmed - `arrived` - Guest has arrived
+	- `paid` - Payment completed - `cancelled` - Booking cancelled - `voided` -
+	Booking voided - `registeredOnline` - Registered through online system
+</ParamField>
+
+<ParamField path="project" type="array">
+  Specify which fields to include in the response. You can project user fields, guest fields, and custom meta fields:
+  
+  **User Fields:**
+  - `firstName`, `lastName`, `email`, `phone`, `secondaryPhone`
+  - `categoryIds`, `dob`, `age`, `pin`, `gender`
+  - `address.notes`, `address.city`, `address.zip`, `address.country`, `address.street`
+  - `refferalType`, `religion`, `internalId`, `credit`, `maritalStatus`
+  - `educationLevel`, `ruralUrban`, `customerId_db`, `lastContactedAt`
+  - `frequencyNextOccurrence`
+  - `personalDataProcessingConsent.accepted`, `personalDataProcessingConsent.consentAgent`, `personalDataProcessingConsent.date`
+  
+  **Guest Fields:**
+  - `centerId`, `sessionId`, `sessionIds`, `programId`, `packageId`, `userId`
+  - `status`, `role`, `isCompanionFor`, `practitionerIds`, `bookedAt`, `createdBy`
+  - `startDate`, `endDate`, `bookingId`, `bookingId_db`
+  - `medicalLetter.ultrasoundNotes`, `medicalLetter.ultrasoundStr`, `medicalLetter.ultrasoundStrHtml`
+  - `medicalLetter.psychiatricExam`, `medicalLetter.diagnoses`, `medicalLetter.customRec`, `medicalLetter.ekg`, `medicalLetter.recommendationsIds`
+  - `medicalData.notes`
+  - `formData.medicalConditions`, `formData.observations`, `formData.mobility`, `formData.accomodationDetails`
+  - `acc.roomId`, `acc.bedType`, `acc.type`, `acc.roomStandardId`, `acc.roomSize`, `acc.floor`, `acc.shareRoomWith`
+  - `financial.subtotal`, `financial.discountIds`, `financial.total`
+  - `financial.deposit.amount`, `financial.deposit.notes`, `financial.deposit.paidAt`, `financial.deposit.paymentType`
+  - `financial.fullPayment.amount`, `financial.fullPayment.notes`, `financial.fullPayment.paidAt`, `financial.fullPayment.paymentType`
+  
+  **Custom Meta Fields:**
+  - `meta.<your-custom-meta-key>` - Replace with your actual custom meta field keys
+  
+  <Note>
+    If no project fields are specified, all available fields will be returned.
+  </Note>
+</ParamField>
+
+#### Example Request
+
+```bash
+GET /public/guests?startDate=2024-01-01&endDate=2024-12-31&role=patient&status=confirmed&project=firstName,lastName,email,startDate,endDate,status
+```
 
 #### Response
 
 ```json
-"guests": {
-  "firstName": string;
-  "lastName": string;
-  "startDate": Date;
-  "endDate": Date;
-  "role": 'patient' | 'guest'
-}[]
+{
+	"guests": [
+		{
+			"firstName": "John",
+			"lastName": "Doe",
+			"email": "john.doe@example.com",
+			"startDate": "2024-06-15T00:00:00Z",
+			"endDate": "2024-06-22T00:00:00Z",
+			"status": "confirmed",
+			"role": "patient"
+			// Additional fields based on project parameter
+		}
+	]
+}
 ```
+
+#### Error Responses
+
+<ResponseField name="400" type="Bad Request">
+	Invalid query parameters or date format
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+	Missing or invalid authentication headers
+</ResponseField>
+
+<ResponseField name="403" type="Forbidden">
+	Insufficient permissions to access guest data
+</ResponseField>

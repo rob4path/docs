@@ -1,0 +1,36 @@
+---
+title: 'GET /public/guests/list'
+description: 'Get a list of all the bookings.'
+deprecated: true
+---
+
+<Warning>
+	This endpoint is deprecated. Please use [GET
+	/public/guests](/api-reference/endpoint/get-guests) instead.
+</Warning>
+
+#### Authentication
+
+This endpoint requires authentication. See [Authentication](/api-reference/authentication) for detailed information about required headers and how to obtain your API keys.
+
+#### Query Params
+
+<ParamField path="start" type="Date" required>
+	From date
+</ParamField>
+
+<ParamField path="end" type="Date" required>
+	To date
+</ParamField>
+
+#### Response
+
+```json
+"guests": {
+  "firstName": string;
+  "lastName": string;
+  "startDate": Date;
+  "endDate": Date;
+  "role": 'patient' | 'companion' | 'guest'
+}[]
+```

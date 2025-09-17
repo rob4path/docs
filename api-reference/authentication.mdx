@@ -1,0 +1,44 @@
+---
+title: 'Authentication'
+description: 'How to authenticate with the Teamm API'
+---
+
+## Overview
+
+All API requests require authentication using three headers. You'll need to register your application first to get your App ID, and obtain API keys from your center's settings.
+
+## Required Headers
+
+<ParamField path="X-API-APP-ID" type="string" required>
+	The ID you received when you registered your application. See the [Create
+	App](/api-reference/endpoint/create-app) endpoint for registration details.
+</ParamField>
+
+<ParamField path="X-API-SECRET-KEY" type="string" required>
+	The API secret key provided by your center.
+</ParamField>
+
+<ParamField path="X-API-PUBLIC-KEY" type="string" required>
+	The API public key provided by your center.
+</ParamField>
+
+## Getting Your API Keys
+
+The keys provided by the center can be found in your center's admin panel:
+
+1. Navigate to **General Settings** → **Other Settings**
+2. On the top right, click the button leading to the **API Secret Keys** page
+3. You'll find the **API Public Key** on the top right
+4. Next to it, there's a button to create a new secret key for each app that wishes to connect to your center's account through the API
+
+<Note>
+	Each application should have its own secret key for security purposes.
+</Note>
+
+## Example Request Headers
+
+```bash
+X-API-APP-ID: your-app-id-here
+X-API-SECRET-KEY: your-secret-key-here
+X-API-PUBLIC-KEY: your-public-key-here
+```
