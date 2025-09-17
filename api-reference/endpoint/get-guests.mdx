@@ -29,13 +29,24 @@ This endpoint requires authentication. See [Authentication](/api-reference/authe
 
 <ParamField
 	path="status"
-	type="'registered' | 'waitingList' | 'review' | 'confirmed' | 'arrived' | 'paid' | 'cancelled' | 'voided' | 'registeredOnline'"
+	type="'registered' | 'waitingList' | 'review' | 'confirmed' | 'arrived' | 'paid' | 'cancelled' | 'voided' | 'registeredOnline' | 'offer' | 'departed'"
 >
 	Filter guests by their booking status: - `registered` - Guest is registered
 	- `waitingList` - Guest is on waiting list - `review` - Booking is under
 	review - `confirmed` - Booking is confirmed - `arrived` - Guest has arrived
 	- `paid` - Payment completed - `cancelled` - Booking cancelled - `voided` -
-	Booking voided - `registeredOnline` - Registered through online system
+	Booking voided - `registeredOnline` - Registered through online system -
+	`offer` - Like a draft booking, which can turn into a booking if the
+	customer accepts the offer - `departed` - Guest has departed
+</ParamField>
+
+<ParamField path="start" type="string" default="1">
+	The starting page number for pagination. Used to control which page of
+	results to return.
+</ParamField>
+
+<ParamField path="length" type="string" default="50">
+	The number of results to return per page.
 </ParamField>
 
 <ParamField path="project" type="array">
@@ -89,7 +100,7 @@ Example:
 #### Example Request
 
 ```bash
-GET /public/guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
+GET /public/guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&start=1&length=25&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
 ```
 
 #### Response
@@ -98,13 +109,13 @@ The response returns data in a **humanized format**, meaning all information is 
 
 ```json
 {
-	"guests": [
+	"data": [
 		{
 			"firstName": "John",
 			"lastName": "Doe",
 			"email": "john.doe@example.com",
-			"startDate": "June 15, 2024",
-			"endDate": "June 22, 2024",
+			"startDate": "06/15/2024",
+			"endDate": "06/22/2024",
 			"status": "Confirmed",
 			"role": "Patient",
 			"ids": {
@@ -117,14 +128,26 @@ The response returns data in a **humanized format**, meaning all information is 
 			}
 			// Additional fields based on project parameter
 		}
-	]
+	],
+	"total": 125
 }
 ```
+
+<Note>
+	**Date Formatting by Locale:** - **Romanian (ro):** DD.MM.YYYY format (e.g.,
+	"15.06.2024") - **English and others:** MM/DD/YYYY format (e.g.,
+	"06/15/2024")
+</Note>
 
 <Note>
 	**Humanized vs Technical Data:** - **Main fields** (like `status`, `role`,
 	dates) are returned in human-readable, localized format - **`ids` field**
 	contains the technical/raw values needed for API operations and integrations
+</Note>
+
+<Note>
+	**Pagination:** Use the `start` and `length` parameters to paginate through
+	results. The response includes pagination metadata to help with navigation.
 </Note>
 
 #### Error Responses
