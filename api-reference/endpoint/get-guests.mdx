@@ -3,6 +3,12 @@ title: 'GET /public/guests'
 description: 'Get a filtered list of guests with advanced query options.'
 ---
 
+<Note>
+	This endpoint returns data in a **humanized format**, meaning all
+	information is ready to be displayed in the language you requested. Use the
+	optional `X-LOCALE` header for localization.
+</Note>
+
 #### Authentication
 
 This endpoint requires authentication. See [Authentication](/api-reference/authentication) for detailed information about required headers and how to obtain your API keys.
@@ -33,45 +39,62 @@ This endpoint requires authentication. See [Authentication](/api-reference/authe
 </ParamField>
 
 <ParamField path="project" type="array">
-  Specify which fields to include in the response. You can project user fields, guest fields, and custom meta fields:
-  
-  **User Fields:**
-  - `firstName`, `lastName`, `email`, `phone`, `secondaryPhone`
-  - `categoryIds`, `dob`, `age`, `pin`, `gender`
-  - `address.notes`, `address.city`, `address.zip`, `address.country`, `address.street`
-  - `refferalType`, `religion`, `internalId`, `credit`, `maritalStatus`
-  - `educationLevel`, `ruralUrban`, `customerId_db`, `lastContactedAt`
-  - `frequencyNextOccurrence`
-  - `personalDataProcessingConsent.accepted`, `personalDataProcessingConsent.consentAgent`, `personalDataProcessingConsent.date`
-  
-  **Guest Fields:**
-  - `centerId`, `sessionId`, `sessionIds`, `programId`, `packageId`, `userId`
-  - `status`, `role`, `isCompanionFor`, `practitionerIds`, `bookedAt`, `createdBy`
-  - `startDate`, `endDate`, `bookingId`, `bookingId_db`
-  - `medicalLetter.ultrasoundNotes`, `medicalLetter.ultrasoundStr`, `medicalLetter.ultrasoundStrHtml`
-  - `medicalLetter.psychiatricExam`, `medicalLetter.diagnoses`, `medicalLetter.customRec`, `medicalLetter.ekg`, `medicalLetter.recommendationsIds`
-  - `medicalData.notes`
-  - `formData.medicalConditions`, `formData.observations`, `formData.mobility`, `formData.accomodationDetails`
-  - `acc.roomId`, `acc.bedType`, `acc.type`, `acc.roomStandardId`, `acc.roomSize`, `acc.floor`, `acc.shareRoomWith`
-  - `financial.subtotal`, `financial.discountIds`, `financial.total`
-  - `financial.deposit.amount`, `financial.deposit.notes`, `financial.deposit.paidAt`, `financial.deposit.paymentType`
-  - `financial.fullPayment.amount`, `financial.fullPayment.notes`, `financial.fullPayment.paidAt`, `financial.fullPayment.paymentType`
-  
-  **Custom Meta Fields:**
-  - `meta.<your-custom-meta-key>` - Replace with your actual custom meta field keys
-  
-  <Note>
-    If no project fields are specified, all available fields will be returned.
-  </Note>
+  Specify which fields to include in the response. You can project customer fields, booking fields, and custom meta fields:
+
+**Customer Fields:**
+
+-   `firstName`, `lastName`, `email`, `phone`, `secondaryPhone`
+-   `dob`, `age`, `pin`, `gender`
+-   `address.notes`, `address.city`, `address.zip`, `address.country`, `address.street`
+-   `refferalType`, `religion`, `internalId`
+
+**Booking Fields:**
+
+-   `centerId`, `sessionId`, `sessionIds`, `programId`, `packageId`, `userId`
+-   `status`, `role`, `isCompanionFor`, `practitionerIds`, `bookedAt`, `createdBy`
+-   `startDate`, `endDate`, `bookingId`,
+-   `medicalLetter.ultrasoundNotes`, `medicalLetter.ultrasoundStr`,
+-   `medicalLetter.psychiatricExam`, `medicalLetter.diagnoses`, `medicalLetter.customRec`, `medicalLetter.ekg`, `medicalLetter.recommendationsIds`
+-   `medicalData.notes`
+-   `formData.medicalConditions`, `formData.observations`, `formData.mobility`, `formData.accomodationDetails`
+-   `acc.roomId`, `acc.bedType`, `acc.type`, `acc.roomStandardId`, `acc.roomSize`, `acc.floor`, `acc.shareRoomWith`
+-   `financial.subtotal`, `financial.discountIds`, `financial.total`
+-   `financial.deposit.amount`, `financial.deposit.notes`, `financial.deposit.paidAt`, `financial.deposit.paymentType`
+-   `financial.fullPayment.amount`, `financial.fullPayment.notes`, `financial.fullPayment.paidAt`, `financial.fullPayment.paymentType`
+
+**Custom Meta Fields:**
+
+-   `meta.<your-custom-meta-key>` - Replace with your actual custom meta field keys
+
+### Finding Your Meta Keys
+
+To find the available meta keys for your center:
+
+1. Navigate to **General Settings** → **Metas**
+2. Search for the desired meta field
+3. Copy the key from the **Key** column
+4. Use it in the format `meta.<key-name>`
+
+Example:
+
+-   `project=firstName,lastName,meta.food-allergies`
+
+<Note>
+	If it's a meta you created, include the prefix `meta.` before the key name.
+	If it's a customer or booking field, just use the field name directly.
+</Note>
+
 </ParamField>
 
 #### Example Request
 
 ```bash
-GET /public/guests?startDate=2024-01-01&endDate=2024-12-31&role=patient&status=confirmed&project=firstName,lastName,email,startDate,endDate,status
+GET /public/guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
 ```
 
 #### Response
+
+The response returns data in a **humanized format**, meaning all information is localized and ready to be displayed to end users in the requested language.
 
 ```json
 {
@@ -80,15 +103,29 @@ GET /public/guests?startDate=2024-01-01&endDate=2024-12-31&role=patient&status=c
 			"firstName": "John",
 			"lastName": "Doe",
 			"email": "john.doe@example.com",
-			"startDate": "2024-06-15T00:00:00Z",
-			"endDate": "2024-06-22T00:00:00Z",
-			"status": "confirmed",
-			"role": "patient"
+			"startDate": "June 15, 2024",
+			"endDate": "June 22, 2024",
+			"status": "Confirmed",
+			"role": "Patient",
+			"ids": {
+				"role": "patient",
+				"status": "confirmed",
+				"sessionId": "sess_123456",
+				"userId": "user_789012",
+				"bookingId": "booking_345678"
+				// Other technical identifiers
+			}
 			// Additional fields based on project parameter
 		}
 	]
 }
 ```
+
+<Note>
+	**Humanized vs Technical Data:** - **Main fields** (like `status`, `role`,
+	dates) are returned in human-readable, localized format - **`ids` field**
+	contains the technical/raw values needed for API operations and integrations
+</Note>
 
 #### Error Responses
 

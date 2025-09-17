@@ -22,6 +22,18 @@ All API requests require authentication using three headers. You'll need to regi
 	The API public key provided by your center.
 </ParamField>
 
+## Optional Headers
+
+<ParamField path="X-LOCALE" type="string">
+	Specify the language/locale for localized responses. When provided, the API
+	will return humanized data in the requested language (e.g., status names,
+	role descriptions, formatted dates). **Available locales:** - `ro` - Română
+	🇷🇴 - `en` - English 🇺🇸 - `no` - Norge 🇳🇴 - `fr` - French 🇫🇷 - `de` -
+	Deutschland 🇩🇪 - `ru` - Россия (Rossiya) 🇷🇺 - `bg` - България (Bulgariya) 🇧🇬
+	- `uk` - Україна (Ukrayina) 🇺🇦 - `it` - Italia 🇮🇹 - `es` - España 🇪🇸 If not
+	provided, the API will use your center's default language.
+</ParamField>
+
 ## Getting Your API Keys
 
 The keys provided by the center can be found in your center's admin panel:
@@ -41,4 +53,10 @@ The keys provided by the center can be found in your center's admin panel:
 X-API-APP-ID: your-app-id-here
 X-API-SECRET-KEY: your-secret-key-here
 X-API-PUBLIC-KEY: your-public-key-here
+X-LOCALE: en
 ```
+
+<Note>
+	The `X-LOCALE` header is optional. When included, responses will be
+	localized to the specified language.
+</Note>
