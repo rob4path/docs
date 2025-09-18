@@ -3,17 +3,23 @@ title: 'GET /sessions/list'
 description: 'Get a list of sessions within a specified date range.'
 ---
 
-<Snippet file="humanized-format-note.mdx" />
+<Snippet file="humanized-format-note" />
 
 #### Authentication
 
-<Snippet file="authentication-info.mdx" />
+<Snippet file="authentication-info" />
 
 #### Query Params
 
-<Snippet file="date-range-params.mdx" />
+<ParamField path="startDate" type="Date" required>
+	Filter by start date (from this date). Format: dateIsoString
+</ParamField>
 
-<Snippet file="pagination-params.mdx" />
+<ParamField path="endDate" type="Date" required>
+	Filter by end date (to this date). Format: dateIsoString
+</ParamField>
+
+<Snippet file="pagination-params" />
 
 #### Example Request
 
@@ -35,21 +41,21 @@ The response returns data in a **humanized format**, meaning all information is 
 			"text": "7-day wellness and relaxation program focusing on mindfulness and rejuvenation",
 			"availablePrograms": [
 				{
-					"id": "prog_001",
+					"_id": "prog_001",
 					"name": "Meditation & Yoga"
 				},
 				{
-					"id": "prog_002",
+					"_id": "prog_002",
 					"name": "Nutritional Counseling"
 				}
 			],
 			"availableUnits": [
 				{
-					"id": "unit_001",
+					"_id": "unit_001",
 					"name": "Standard Room"
 				},
 				{
-					"id": "unit_002",
+					"_id": "unit_002",
 					"name": "Deluxe Suite"
 				}
 			],
@@ -63,13 +69,13 @@ The response returns data in a **humanized format**, meaning all information is 
 			"text": "5-day detox and cleansing program with medical supervision",
 			"availablePrograms": [
 				{
-					"id": "prog_003",
+					"_id": "prog_003",
 					"name": "Liver Detox Treatment"
 				}
 			],
 			"availableUnits": [
 				{
-					"id": "unit_003",
+					"_id": "unit_003",
 					"name": "Medical Suite"
 				}
 			],
@@ -81,18 +87,18 @@ The response returns data in a **humanized format**, meaning all information is 
 }
 ```
 
-<Snippet file="date-formatting-note.mdx" />
+<Snippet file="date-formatting-note" />
 
 <Note>
 	**Humanized Data:** - **Dates** are formatted according to the requested
 	locale - **All text fields** are localized when available
 </Note>
 
-<Snippet file="pagination-note.mdx" />
+<Snippet file="pagination-note" />
 
 #### Error Responses
 
-<Snippet file="common-error-responses.mdx" />
+<Snippet file="common-error-responses" />
 
 <ResponseField name="404" type="Not Found">
 	Start Date, End Date, or Center ID not found
