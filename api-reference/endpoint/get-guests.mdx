@@ -78,8 +78,9 @@ description: 'Get a filtered list of guests with advanced query options.'
 -   `financial.subtotal`, `financial.discountIds`, `financial.total`
 -   `financial.deposit.amount`, `financial.deposit.notes`, `financial.deposit.paidAt`, `financial.deposit.paymentType`
 -   `financial.fullPayment.amount`, `financial.fullPayment.notes`, `financial.fullPayment.paidAt`, `financial.fullPayment.paymentType`
+-   `skippingMeals` (if you use the meal management feature to skip meals for certain dates)
 
-**Custom Meta Fields:**
+    **Custom Meta Fields:**
 
 -   `meta.<your-custom-meta-key>` - Replace with your actual custom meta field keys
 
@@ -138,6 +139,11 @@ The response returns data in a **humanized format**, meaning all information is 
 			"endDate": "06/22/2024",
 			"status": "Confirmed",
 			"role": "Patient",
+			"skippingMeals": {
+				"breakfast": ["2025-09-20", "2025-09-25"], // skips breakfast on these dates
+				"lunch": [], // eats all lunches
+				"dinner": ["2025-09-22"] // skips dinner on this date
+			},
 			"ids": {
 				"role": "patient",
 				"status": "confirmed",

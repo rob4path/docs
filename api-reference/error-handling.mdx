@@ -1,0 +1,312 @@
+---
+title: 'Error Handling'
+description: 'Understanding and handling API errors effectively'
+---
+
+## HTTP Status Codes
+
+The Teamm API uses standard HTTP status codes to indicate the success or failure of requests:
+
+| Status Code | Meaning               | Description                       |
+| ----------- | --------------------- | --------------------------------- |
+| `200`       | OK                    | Request successful                |
+| `400`       | Bad Request           | Invalid request parameters        |
+| `401`       | Unauthorized          | Missing or invalid authentication |
+| `403`       | Forbidden             | Insufficient permissions          |
+| `404`       | Not Found             | Resource not found                |
+| `429`       | Too Many Requests     | Rate limit exceeded               |
+| `500`       | Internal Server Error | Server error occurred             |
+
+## Error Response Format
+
+When an error occurs, the API returns a JSON response with details:
+
+```json
+{
+	"error": {
+		"code": "INVALID_PARAMETER",
+		"message": "Start Date is required",
+		"details": {
+			"parameter": "startDate",
+			"provided": null,
+			"expected": "Date in YYYY-MM-DD format"
+		}
+	}
+}
+```
+
+## Common Error Scenarios
+
+### Authentication Errors
+
+<Accordion title="401 - Missing API Headers">
+**Problem**: Required authentication headers are missing
+
+**Solution**: Ensure all three headers are included:
+
+```bash
+X-API-APP-ID: your-app-id
+X-API-PUBLIC-KEY: your-public-key
+X-API-SECRET-KEY: your-secret-key
+```
+
+</Accordion>
+
+<Accordion title="401 - Invalid API Keys">
+**Problem**: API keys are incorrect or expired
+
+**Solution**:
+
+1. Verify keys in your center's settings
+2. Generate new keys if needed
+3. Ensure no extra spaces or characters
+    </Accordion>
+
+<Accordion title="403 - Insufficient Permissions">
+**Problem**: API key doesn't have required permissions
+
+**Solution**: Contact your center administrator to grant API access permissions
+
+</Accordion>
+
+### Parameter Errors
+
+<Accordion title="400 - Missing Required Parameters">
+**Problem**: Required parameters like `startDate` and `endDate` are missing
+
+**Solution**: Include all required parameters for the endpoint
+
+```javascript
+// ❌ Incorrect
+fetch('/api/guests');
+
+// ✅ Correct
+fetch('/api/guests?startDate=2025-01-01&endDate=2025-01-31');
+```
+
+</Accordion>
+
+<Accordion title="400 - Invalid Date Format">
+**Problem**: Dates are not in the expected YYYY-MM-DD format
+
+**Solution**: Use ISO date format
+
+```javascript
+// ❌ Incorrect
+startDate: '01/15/2025';
+
+// ✅ Correct
+startDate: '2025-01-15';
+```
+
+</Accordion>
+
+### Rate Limiting
+
+<Accordion title="429 - Rate Limit Exceeded">
+**Problem**: Too many requests sent in a short time
+
+**Solution**: Implement exponential backoff
+
+```javascript
+async function apiCallWithRetry(url, options, maxRetries = 3) {
+	for (let i = 0; i < maxRetries; i++) {
+		try {
+			const response = await fetch(url, options);
+
+			if (response.status === 429) {
+				const retryAfter =
+					response.headers.get('Retry-After') || Math.pow(2, i);
+				await new Promise((resolve) =>
+					setTimeout(resolve, retryAfter * 1000)
+				);
+				continue;
+			}
+
+			return response;
+		} catch (error) {
+			if (i === maxRetries - 1) throw error;
+		}
+	}
+}
+```
+
+</Accordion>
+
+## Best Practices
+
+### Error Handling Strategy
+
+```javascript
+class TeammAPIClient {
+	async makeRequest(endpoint, options = {}) {
+		try {
+			const response = await fetch(
+				`https://api.teamm.com/v1${endpoint}`,
+				{
+					...options,
+					headers: {
+						'X-API-APP-ID': this.appId,
+						'X-API-PUBLIC-KEY': this.publicKey,
+						'X-API-SECRET-KEY': this.secretKey,
+						'X-LOCALE': 'en',
+						...options.headers,
+					},
+				}
+			);
+
+			// Handle different status codes
+			switch (response.status) {
+				case 200:
+					return await response.json();
+
+				case 400:
+					const badRequestError = await response.json();
+					throw new APIError(
+						'Invalid request parameters',
+						badRequestError
+					);
+
+				case 401:
+					throw new APIError(
+						'Authentication failed - check your API keys'
+					);
+
+				case 403:
+					throw new APIError(
+						'Insufficient permissions for this operation'
+					);
+
+				case 404:
+					throw new APIError('Resource not found');
+
+				case 429:
+					const retryAfter = response.headers.get('Retry-After');
+					throw new RateLimitError(
+						`Rate limit exceeded. Retry after ${retryAfter} seconds`
+					);
+
+				case 500:
+					throw new APIError(
+						'Server error occurred. Please try again later'
+					);
+
+				default:
+					throw new APIError(
+						`Unexpected error: ${response.status} ${response.statusText}`
+					);
+			}
+		} catch (error) {
+			if (error instanceof APIError) {
+				throw error;
+			}
+
+			// Network or other errors
+			throw new APIError('Network error occurred', error);
+		}
+	}
+}
+
+class APIError extends Error {
+	constructor(message, details = null) {
+		super(message);
+		this.name = 'APIError';
+		this.details = details;
+	}
+}
+
+class RateLimitError extends APIError {
+	constructor(message) {
+		super(message);
+		this.name = 'RateLimitError';
+	}
+}
+```
+
+### Logging and Monitoring
+
+```javascript
+// Log errors for debugging
+function logAPIError(error, context) {
+	console.error('API Error:', {
+		message: error.message,
+		details: error.details,
+		context: context,
+		timestamp: new Date().toISOString(),
+	});
+
+	// Send to monitoring service
+	if (typeof window !== 'undefined' && window.analytics) {
+		window.analytics.track('API Error', {
+			error: error.message,
+			endpoint: context.endpoint,
+		});
+	}
+}
+```
+
+### Validation Before API Calls
+
+```javascript
+function validateGuestParams(params) {
+	const errors = [];
+
+	// Check required date parameters
+	if (!params.startDate && !params.sessionId && !params.sessionIds) {
+		errors.push(
+			'Either startDate/endDate or sessionId/sessionIds is required'
+		);
+	}
+
+	if (params.startDate && !params.endDate) {
+		errors.push('endDate is required when startDate is provided');
+	}
+
+	// Validate date format
+	if (params.startDate && !/^\d{4}-\d{2}-\d{2}$/.test(params.startDate)) {
+		errors.push('startDate must be in YYYY-MM-DD format');
+	}
+
+	// Validate pagination
+	if (params.length && (params.length < 1 || params.length > 100)) {
+		errors.push('length must be between 1 and 100');
+	}
+
+	if (errors.length > 0) {
+		throw new Error(`Invalid parameters: ${errors.join(', ')}`);
+	}
+}
+```
+
+## Troubleshooting Checklist
+
+When encountering API issues:
+
+1. **Check Authentication**
+
+    - [ ] All three headers are present
+    - [ ] API keys are correct and active
+    - [ ] No extra whitespace in keys
+
+2. **Validate Parameters**
+
+    - [ ] Required parameters are included
+    - [ ] Date formats are YYYY-MM-DD
+    - [ ] Pagination values are within limits
+
+3. **Check Rate Limits**
+
+    - [ ] Not exceeding 1000 requests/hour
+    - [ ] Not exceeding 100 requests/minute burst
+
+4. **Network Issues**
+    - [ ] Internet connectivity is stable
+    - [ ] No firewall blocking requests
+    - [ ] SSL/TLS certificates are valid
+
+If issues persist, contact [api-support@teamm.com](mailto:api-support@teamm.com) with:
+
+-   Error message and status code
+-   Request details (headers, parameters)
+-   Timestamp of the error
+-   Your App ID (never share secret keys)

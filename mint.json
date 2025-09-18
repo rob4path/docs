@@ -1,6 +1,6 @@
 {
 	"$schema": "https://mintlify.com/schema.json",
-	"name": "Starter Kit",
+	"name": "Teamm API Documentation",
 	"logo": {
 		"dark": "/logo/dark.png",
 		"light": "/logo/light.png"
@@ -56,7 +56,9 @@
 			"group": "API Reference",
 			"pages": [
 				"api-reference/introduction",
-				"api-reference/authentication"
+				"api-reference/getting-started",
+				"api-reference/authentication",
+				"api-reference/error-handling"
 			]
 		},
 		{

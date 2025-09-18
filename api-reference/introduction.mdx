@@ -5,20 +5,35 @@ description: 'Getting started with the Teamm API'
 
 ## Welcome
 
-Welcome to the Teamm API documentation. This API allows you to integrate with Teamm's booking and guest management system.
+Welcome to the Teamm API documentation. This API allows you to integrate with Teamm's booking and guest management system for wellness centers, spas, and health facilities.
+
+## What You Can Do
+
+The Teamm API enables you to:
+
+-   **Manage Guests**: Retrieve guest information, bookings, and status updates
+-   **Access Orders**: Get order details and transaction history
+-   **View Sessions**: Fetch session schedules and availability
+
+## Base URL
+
+All API requests should be made to:
+
+```
+https://api.teamm.work
+```
 
 ## Authentication
 
 All API endpoints require authentication. Please see the [Authentication](/api-reference/authentication) page for detailed information about required headers and how to obtain your API keys.
 
-## API Reference
+## Data Format
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Teamm API returns data in **humanized format**, meaning all information is localized and ready for display in your application. Use the `X-LOCALE` header to specify your preferred language.
 
-<Card
-	title="Teamm API Endpoints"
-	icon="leaf"
-	href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-	View the OpenAPI specification file
-</Card>
+## Rate Limits
+
+The API has the following rate limits:
+
+-   **1000 requests per hour** per API key
+-   **Burst limit**: 100 requests per minute
