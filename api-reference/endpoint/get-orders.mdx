@@ -1,0 +1,98 @@
+---
+title: 'GET /orders/list'
+description: 'Get a list of orders within a specified date range.'
+---
+
+<Snippet file="humanized-format-note.mdx" />
+
+#### Authentication
+
+<Snippet file="authentication-info.mdx" />
+
+#### Query Params
+
+<Snippet file="date-range-params.mdx" />
+
+<ParamField path="formatDates" type="boolean" default="false">
+	Whether to format dates according to the locale. When set to `true`, dates
+	will be formatted in a human-readable format based on the X-LOCALE header.
+</ParamField>
+
+<ParamField path="includeGuestNames" type="boolean" default="false">
+	Whether to include guest names in the response. When set to `true`, the
+	response will include guest name information.
+</ParamField>
+
+#### Example Requests
+
+**Basic request:**
+
+```bash
+GET /orders/list?startDate=2025-01-01&endDate=2025-01-31
+```
+
+**With formatted dates and guest names:**
+
+```bash
+GET /orders/list?startDate=2025-01-01&endDate=2025-01-31&formatDates=true&includeGuestNames=true
+```
+
+#### Response
+
+The response returns data in a **humanized format**, meaning all information is localized and ready to be displayed to end users in the requested language.
+
+```json
+[
+	{
+		"uuid": "order_123456",
+		"orderDate": "01/15/2025",
+		"totalAmount": "$250.00",
+		"status": "Confirmed",
+		"guestNames": "John Doe, Jane Smith",
+		"items": [
+			{
+				"name": "Room Upgrade",
+				"quantity": 1,
+				"price": "$150.00"
+			},
+			{
+				"name": "Spa Treatment",
+				"quantity": 2,
+				"price": "$50.00"
+			}
+		]
+		// Additional fields based on the order data
+	}
+]
+```
+
+<Note>
+	**Date Formatting by Locale:** - **Romanian (ro):** DD.MM.YYYY format (e.g.,
+	"15.01.2025") - **English and others:** MM/DD/YYYY format (e.g.,
+	"01/15/2025")
+</Note>
+
+<Note>
+	**Humanized vs Technical Data:** - **Main fields** are returned in
+	human-readable, localized format - **Dates** are formatted according to
+	locale when `formatDates=true` - **Guest names** are included when
+	`includeGuestNames=true`
+</Note>
+
+#### Error Responses
+
+<ResponseField name="400" type="Bad Request">
+	Invalid query parameters or date format
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+	Missing or invalid authentication headers
+</ResponseField>
+
+<ResponseField name="403" type="Forbidden">
+	Insufficient permissions to access order data
+</ResponseField>
+
+<ResponseField name="404" type="Not Found">
+	Start Date or End Date not provided
+</ResponseField>

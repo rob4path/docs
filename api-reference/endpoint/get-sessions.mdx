@@ -1,0 +1,99 @@
+---
+title: 'GET /sessions/list'
+description: 'Get a list of sessions within a specified date range.'
+---
+
+<Snippet file="humanized-format-note.mdx" />
+
+#### Authentication
+
+<Snippet file="authentication-info.mdx" />
+
+#### Query Params
+
+<Snippet file="date-range-params.mdx" />
+
+<Snippet file="pagination-params.mdx" />
+
+#### Example Request
+
+```bash
+GET /sessions/list?startDate=2025-01-01&endDate=2025-01-31&start=1&length=25
+```
+
+#### Response
+
+The response returns data in a **humanized format**, meaning all information is localized and ready to be displayed to end users in the requested language.
+
+```json
+{
+	"data": [
+		{
+			"_id": "sess_123456",
+			"name": "Wellness Retreat Program",
+			"number": "WRP-001",
+			"text": "7-day wellness and relaxation program focusing on mindfulness and rejuvenation",
+			"availablePrograms": [
+				{
+					"id": "prog_001",
+					"name": "Meditation & Yoga"
+				},
+				{
+					"id": "prog_002",
+					"name": "Nutritional Counseling"
+				}
+			],
+			"availableUnits": [
+				{
+					"id": "unit_001",
+					"name": "Standard Room"
+				},
+				{
+					"id": "unit_002",
+					"name": "Deluxe Suite"
+				}
+			],
+			"startDate": "01/15/2025",
+			"endDate": "01/22/2025"
+		},
+		{
+			"_id": "sess_789012",
+			"name": "Detox Program",
+			"number": "DTP-002",
+			"text": "5-day detox and cleansing program with medical supervision",
+			"availablePrograms": [
+				{
+					"id": "prog_003",
+					"name": "Liver Detox Treatment"
+				}
+			],
+			"availableUnits": [
+				{
+					"id": "unit_003",
+					"name": "Medical Suite"
+				}
+			],
+			"startDate": "01/20/2025",
+			"endDate": "01/25/2025"
+		}
+	],
+	"total": 65
+}
+```
+
+<Snippet file="date-formatting-note.mdx" />
+
+<Note>
+	**Humanized Data:** - **Dates** are formatted according to the requested
+	locale - **All text fields** are localized when available
+</Note>
+
+<Snippet file="pagination-note.mdx" />
+
+#### Error Responses
+
+<Snippet file="common-error-responses.mdx" />
+
+<ResponseField name="404" type="Not Found">
+	Start Date, End Date, or Center ID not found
+</ResponseField>

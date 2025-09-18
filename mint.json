@@ -64,6 +64,9 @@
 			"pages": [
 				"api-reference/endpoint/get-guests",
 				"api-reference/endpoint/get-guests-list",
+				"api-reference/endpoint/get-orders",
+				"api-reference/endpoint/get-order-by-uuid",
+				"api-reference/endpoint/get-sessions",
 				"api-reference/endpoint/create-app"
 			]
 		}

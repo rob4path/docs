@@ -3,15 +3,11 @@ title: 'GET /guests'
 description: 'Get a filtered list of guests with advanced query options.'
 ---
 
-<Note>
-	This endpoint returns data in a **humanized format**, meaning all
-	information is ready to be displayed in the language you requested. Use the
-	optional `X-LOCALE` header for localization.
-</Note>
+<Snippet file="humanized-format-note.mdx" />
 
 #### Authentication
 
-This endpoint requires authentication. See [Authentication](/api-reference/authentication) for detailed information about required headers and how to obtain your API keys.
+<Snippet file="authentication-info.mdx" />
 
 #### Query Params
 
@@ -57,14 +53,7 @@ This endpoint requires authentication. See [Authentication](/api-reference/authe
 	customer accepts the offer - `departed` - Guest has departed
 </ParamField>
 
-<ParamField path="start" type="string" default="1">
-	The starting page number for pagination. Used to control which page of
-	results to return.
-</ParamField>
-
-<ParamField path="length" type="string" default="50">
-	The number of results to return per page.
-</ParamField>
+<Snippet file="pagination-params.mdx" />
 
 <ParamField path="project" type="array">
   Specify which fields to include in the response. You can project customer fields, booking fields, and custom meta fields:
@@ -162,33 +151,12 @@ The response returns data in a **humanized format**, meaning all information is 
 }
 ```
 
-<Note>
-	**Date Formatting by Locale:** - **Romanian (ro):** DD.MM.YYYY format (e.g.,
-	"15.06.2024") - **English and others:** MM/DD/YYYY format (e.g.,
-	"06/15/2024")
-</Note>
+<Snippet file="date-formatting-note.mdx" />
 
-<Note>
-	**Humanized vs Technical Data:** - **Main fields** (like `status`, `role`,
-	dates) are returned in human-readable, localized format - **`ids` field**
-	contains the technical/raw values needed for API operations and integrations
-</Note>
+<Snippet file="humanized-vs-technical-note.mdx" />
 
-<Note>
-	**Pagination:** Use the `start` and `length` parameters to paginate through
-	results. The response includes pagination metadata to help with navigation.
-</Note>
+<Snippet file="pagination-note.mdx" />
 
 #### Error Responses
 
-<ResponseField name="400" type="Bad Request">
-	Invalid query parameters or date format
-</ResponseField>
-
-<ResponseField name="401" type="Unauthorized">
-	Missing or invalid authentication headers
-</ResponseField>
-
-<ResponseField name="403" type="Forbidden">
-	Insufficient permissions to access guest data
-</ResponseField>
+<Snippet file="common-error-responses.mdx" />
