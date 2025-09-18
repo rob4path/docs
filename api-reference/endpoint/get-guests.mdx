@@ -15,12 +15,29 @@ This endpoint requires authentication. See [Authentication](/api-reference/authe
 
 #### Query Params
 
-<ParamField path="startDate" type="Date" required>
-	Filter guests by start date (from this date)
+<Note>
+	**Required Parameters:** You must provide either (`startDate` AND `endDate`)
+	OR (`sessionId` OR `sessionIds`) to filter the results.
+</Note>
+
+<ParamField path="startDate" type="Date">
+	Filter guests by start date (from this date). Required when not using
+	sessionId/sessionIds.
 </ParamField>
 
-<ParamField path="endDate" type="Date" required>
-	Filter guests by end date (to this date)
+<ParamField path="endDate" type="Date">
+	Filter guests by end date (to this date). Required when not using
+	sessionId/sessionIds.
+</ParamField>
+
+<ParamField path="sessionId" type="string">
+	Filter guests by a specific session ID. Use this to get guests for a single
+	session.
+</ParamField>
+
+<ParamField path="sessionIds" type="array">
+	Filter guests by multiple session IDs. Use this to get guests for multiple
+	sessions. Provide as comma-separated values (e.g., "sess1,sess2,sess3").
 </ParamField>
 
 <ParamField path="role" type="'patient' | 'companion' | 'guest'">
@@ -97,10 +114,24 @@ Example:
 
 </ParamField>
 
-#### Example Request
+#### Example Requests
+
+**Filter by date range:**
 
 ```bash
 GET /guests?startDate=2025-01-01&endDate=2025-01-31&role=patient&status=confirmed&start=1&length=25&project=firstName,lastName,email,startDate,endDate,meta.food-allergies
+```
+
+**Filter by specific session:**
+
+```bash
+GET /guests?sessionId=sess_123456&role=patient&start=1&length=25&project=firstName,lastName,email,startDate,endDate
+```
+
+**Filter by multiple sessions:**
+
+```bash
+GET /guests?sessionIds=sess_123456,sess_789012,sess_345678&status=confirmed&start=1&length=25&project=firstName,lastName,email
 ```
 
 #### Response
