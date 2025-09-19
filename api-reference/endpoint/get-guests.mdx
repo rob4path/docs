@@ -22,6 +22,8 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 <Note>
 	**Required Parameters:** You must provide either (`startDate` AND `endDate`)
 	OR (`sessionId` OR `sessionIds`) to filter the results.
+	
+	**Optional Filters:** `sessionIdsExclude` can be used with `startDate` and `endDate` to exclude specific sessions from the date range.
 </Note>
 
 <ParamField path="startDate" type="Date">
@@ -42,6 +44,12 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 <ParamField path="sessionIds" type="array">
 	Filter guests by multiple session IDs. Use this to get guests for multiple
 	sessions. Provide as comma-separated values (e.g., "sess1,sess2,sess3").
+</ParamField>
+
+<ParamField path="sessionIdsExclude" type="array">
+	Exclude guests from specific session IDs. Can be used in combination with
+	startDate and endDate parameters to filter out specific sessions from a date range.
+	Provide as comma-separated values (e.g., "sess1,sess2,sess3").
 </ParamField>
 
 <ParamField path="role" type="'patient' | 'companion' | 'guest'">
@@ -130,6 +138,12 @@ GET /guests?sessionId=sess_123456&role=patient&start=1&length=25&project=firstNa
 
 ```bash
 GET /guests?sessionIds=sess_123456,sess_789012,sess_345678&status=confirmed&start=1&length=25&project=firstName,lastName,email
+```
+
+**Filter by date range excluding specific sessions:**
+
+```bash
+GET /guests?startDate=2025-01-01&endDate=2025-01-31&sessionIdsExclude=sess_999888,sess_777666&role=patient&start=1&length=25&project=firstName,lastName,email
 ```
 
 #### Response
