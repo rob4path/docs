@@ -3,14 +3,14 @@ title: 'Getting Started'
 description: 'Quick start guide for integrating with the Teamm API'
 ---
 
-import { BASE_URL } from '/snippets/base-url.mdx';
+import BaseUrl from '/snippets/base-url.mdx';
 
 ## Base URL
 
 All API requests should be made to:
 
 ```
-{BASE_URL}
+<BaseUrl />
 ```
 
 ## Prerequisites
@@ -53,6 +53,7 @@ Here's a simple example to get started:
 
 <CodeGroup>
 
+````bash cURL
 ```bash cURL
 curl -X GET "{BASE_URL}/guests" \
   -H "X-API-APP-ID: your-app-id" \
@@ -63,7 +64,7 @@ curl -X GET "{BASE_URL}/guests" \
      -d "endDate=2025-01-31" \
      -d "start=1" \
      -d "length=10"
-```
+````
 
 ```javascript JavaScript
 const response = await fetch(
@@ -87,6 +88,53 @@ const response = await fetch(
 const data = await response.json();
 console.log(data);
 ```
+
+```python Python
+import requests
+
+url = "{BASE_URL}/guests"
+headers = {
+    "X-API-APP-ID": "your-app-id",
+    "X-API-PUBLIC-KEY": "your-public-key",
+    "X-API-SECRET-KEY": "your-secret-key",
+    "X-LOCALE": "en"
+}
+params = {
+    "startDate": "2025-01-01",
+    "endDate": "2025-01-31",
+    "start": 1,
+    "length": 10
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+print(data)
+```
+
+````
+
+```javascript JavaScript
+const response = await fetch(
+	'{BASE_URL}/guests?' +
+		new URLSearchParams({
+			startDate: '2025-01-01',
+			endDate: '2025-01-31',
+			start: '1',
+			length: '10',
+		}),
+	{
+		headers: {
+			'X-API-APP-ID': 'your-app-id',
+			'X-API-PUBLIC-KEY': 'your-public-key',
+			'X-API-SECRET-KEY': 'your-secret-key',
+			'X-LOCALE': 'en',
+		},
+	}
+);
+
+const data = await response.json();
+console.log(data);
+````
 
 ```python Python
 import requests

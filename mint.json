@@ -37,14 +37,14 @@
 	],
 	"anchors": [
 		{
-			"name": "teamm.work",
+			"name": "Admin Panel",
 			"icon": "work",
 			"url": "https://teamm.work"
 		},
 		{
-			"name": "teamm.io",
+			"name": "Landing Page",
 			"icon": "newspaper",
-			"url": "https://teamm.io"
+			"url": "https://landing.teamm.work"
 		}
 	],
 	"navigation": [
