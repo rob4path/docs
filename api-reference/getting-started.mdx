@@ -3,14 +3,12 @@ title: 'Getting Started'
 description: 'Quick start guide for integrating with the Teamm API'
 ---
 
-import BaseUrl from '/snippets/base-url.mdx';
-
 ## Base URL
 
 All API requests should be made to:
 
 ```
-<BaseUrl />
+https://api.teamm.work
 ```
 
 ## Prerequisites
@@ -40,12 +38,7 @@ The API has the following rate limits:
 
 ### 1. Obtain API Keys
 
-1. Navigate to **General Settings** → **Other Settings** in your Teamm center
-2. Click on **API Secret Keys**
-3. Create a new application and note down your keys:
-    - App ID
-    - Public Key
-    - Secret Key
+Please see the [Authentication](/api-reference/authentication) page for detailed instructions on how to obtain your API keys.
 
 ### 2. Make Your First Request
 
@@ -55,7 +48,7 @@ Here's a simple example to get started:
 
 ````bash cURL
 ```bash cURL
-curl -X GET "{BASE_URL}/guests" \
+curl -X GET "https://api.teamm.work/v1/guests" \
   -H "X-API-APP-ID: your-app-id" \
   -H "X-API-PUBLIC-KEY: your-public-key" \
   -H "X-API-SECRET-KEY: your-secret-key" \
@@ -68,7 +61,7 @@ curl -X GET "{BASE_URL}/guests" \
 
 ```javascript JavaScript
 const response = await fetch(
-	'{BASE_URL}/guests?' +
+	'https://api.teamm.work/v1/guests?' +
 		new URLSearchParams({
 			startDate: '2025-01-01',
 			endDate: '2025-01-31',
@@ -92,7 +85,7 @@ console.log(data);
 ```python Python
 import requests
 
-url = "{BASE_URL}/guests"
+url = "https://api.teamm.work/v1/guests"
 headers = {
     "X-API-APP-ID": "your-app-id",
     "X-API-PUBLIC-KEY": "your-public-key",
@@ -115,7 +108,7 @@ print(data)
 
 ```javascript JavaScript
 const response = await fetch(
-	'{BASE_URL}/guests?' +
+	'https://api.teamm.work/v1/guests?' +
 		new URLSearchParams({
 			startDate: '2025-01-01',
 			endDate: '2025-01-31',
@@ -135,28 +128,6 @@ const response = await fetch(
 const data = await response.json();
 console.log(data);
 ````
-
-```python Python
-import requests
-
-url = "{BASE_URL}/guests"
-headers = {
-    "X-API-APP-ID": "your-app-id",
-    "X-API-PUBLIC-KEY": "your-public-key",
-    "X-API-SECRET-KEY": "your-secret-key",
-    "X-LOCALE": "en"
-}
-params = {
-    "startDate": "2025-01-01",
-    "endDate": "2025-01-31",
-    "start": 1,
-    "length": 10
-}
-
-response = requests.get(url, headers=headers, params=params)
-data = response.json()
-print(data)
-```
 
 </CodeGroup>
 

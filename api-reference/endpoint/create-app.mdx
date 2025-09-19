@@ -1,27 +1,38 @@
 ---
-title: "POST /apps/register"
-description: "Create an application that you can use for our public api."
+title: 'POST /apps/register'
+description: 'Create an application that you can use for our public api.'
 ---
 
 ### Body
 
 <ParamField path="name" type="string" required>
-  Name of your application
+	Name of your application
 </ParamField>
 
 <ParamField path="email" type="string" required>
-  Email of your application
+	Email of your application
 </ParamField>
 
 Example:
 
 ```json
 {
-"name": "My awesome app";
-"email": "awesome.app@mail.com";
+	"name": "Kitchen inventory app",
+	"email": "kitchen.inventory@mail.com"
 }
 ```
 
 ### Response
 
-As a response you will get your APP ID. Please save it for future use.
+As a response you will get your APP ID.
+
+<Warning>
+	**Very important**: Save your app ID immediately as you cannot see it later!
+	Make sure to store it securely as you'll need it for all future API calls.
+</Warning>
+
+```json
+{
+	"appId": "a1b2c3d4-e5f6-7890-1234-56789abcdef0"
+}
+```
