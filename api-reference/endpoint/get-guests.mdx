@@ -3,11 +3,19 @@ title: 'GET /guests'
 description: 'Get a filtered list of guests with advanced query options.'
 ---
 
-<Snippet file="humanized-format-note" />
+import HumanizedFormatNote from '/snippets/humanized-format-note.mdx';
+import AuthenticationInfo from '/snippets/authentication-info.mdx';
+import PaginationParams from '/snippets/pagination-params.mdx';
+import DateFormattingNote from '/snippets/date-formatting-note.mdx';
+import HumanizedVsTechnicalNote from '/snippets/humanized-vs-technical-note.mdx';
+import PaginationNote from '/snippets/pagination-note.mdx';
+import CommonErrorResponses from '/snippets/common-error-responses.mdx';
+
+<HumanizedFormatNote />
 
 #### Authentication
 
-<Snippet file="authentication-info" />
+<AuthenticationInfo />
 
 #### Query Params
 
@@ -53,7 +61,7 @@ description: 'Get a filtered list of guests with advanced query options.'
 	customer accepts the offer - `departed` - Guest has departed
 </ParamField>
 
-<Snippet file="pagination-params" />
+<PaginationParams />
 
 <ParamField path="project" type="array">
   Specify which fields to include in the response. You can project customer fields, booking fields, and custom meta fields:
@@ -157,12 +165,12 @@ The response returns data in a **humanized format**, meaning all information is 
 }
 ```
 
-<Snippet file="date-formatting-note" />
+<DateFormattingNote />
 
-<Snippet file="humanized-vs-technical-note" />
+<HumanizedVsTechnicalNote />
 
-<Snippet file="pagination-note" />
+<PaginationNote />
 
 #### Error Responses
 
-<Snippet file="common-error-responses" />
+<CommonErrorResponses />

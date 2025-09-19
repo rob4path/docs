@@ -3,28 +3,35 @@ title: 'GET /sessions/list'
 description: 'Get a list of sessions within a specified date range.'
 ---
 
-<Snippet file="humanized-format-note" />
+import HumanizedFormatNote from '/snippets/humanized-format-note.mdx';
+import AuthenticationInfo from '/snippets/authentication-info.mdx';
+import PaginationParams from '/snippets/pagination-params.mdx';
+import DateFormattingNote from '/snippets/date-formatting-note.mdx';
+import PaginationNote from '/snippets/pagination-note.mdx';
+import CommonErrorResponses from '/snippets/common-error-responses.mdx';
+
+<HumanizedFormatNote />
 
 #### Authentication
 
-<Snippet file="authentication-info" />
+<AuthenticationInfo />
 
 #### Query Params
 
 <ParamField path="startDate" type="Date" required>
-	Filter by start date (from this date). Format: dateIsoString
+	Filter by start date (from this date). Format: IsoString
 </ParamField>
 
 <ParamField path="endDate" type="Date" required>
-	Filter by end date (to this date). Format: dateIsoString
+	Filter by end date (to this date). Format: IsoString
 </ParamField>
 
-<Snippet file="pagination-params" />
+<PaginationParams />
 
 #### Example Request
 
 ```bash
-GET /sessions/list?startDate=2025-01-01&endDate=2025-01-31&start=1&length=25
+GET /sessions/list?startDate=2025-01-01T00:00:00.000Z&endDate=2025-01-31T23:59:59.999Z&start=1&length=25
 ```
 
 #### Response
@@ -36,70 +43,71 @@ The response returns data in a **humanized format**, meaning all information is 
 	"data": [
 		{
 			"_id": "sess_123456",
-			"name": "Wellness Retreat Program",
-			"number": "WRP-001",
-			"text": "7-day wellness and relaxation program focusing on mindfulness and rejuvenation",
+			"name": "Holistic Wellness Retreat",
+			"number": "HWR-001",
+			"text": "7-day comprehensive wellness program focusing on mental health, physical fitness, and nutritional balance",
 			"availablePrograms": [
 				{
 					"_id": "prog_001",
-					"name": "Meditation & Yoga"
+					"name": "Mindfulness & Meditation"
 				},
 				{
 					"_id": "prog_002",
-					"name": "Nutritional Counseling"
+					"name": "Nutritional Therapy"
+				},
+				{
+					"_id": "prog_003",
+					"name": "Fitness & Movement"
 				}
 			],
 			"availableUnits": [
 				{
 					"_id": "unit_001",
-					"name": "Standard Room"
+					"name": "Wellness Suite"
 				},
 				{
 					"_id": "unit_002",
-					"name": "Deluxe Suite"
+					"name": "Garden View Room"
 				}
 			],
-			"startDate": "01/15/2025",
-			"endDate": "01/22/2025"
+			"startDate": "2025-01-15T08:00:00.000Z",
+			"endDate": "2025-01-22T18:00:00.000Z"
 		},
 		{
 			"_id": "sess_789012",
-			"name": "Detox Program",
-			"number": "DTP-002",
-			"text": "5-day detox and cleansing program with medical supervision",
+			"name": "Digital Detox & Mental Health",
+			"number": "DDM-002",
+			"text": "5-day program for stress reduction, digital wellness, and mental health restoration",
 			"availablePrograms": [
 				{
-					"_id": "prog_003",
-					"name": "Liver Detox Treatment"
+					"_id": "prog_004",
+					"name": "Stress Management Therapy"
+				},
+				{
+					"_id": "prog_005",
+					"name": "Digital Wellness Workshop"
 				}
 			],
 			"availableUnits": [
 				{
 					"_id": "unit_003",
-					"name": "Medical Suite"
+					"name": "Tranquil Retreat Room"
+				},
+				{
+					"_id": "unit_004",
+					"name": "Nature Connect Suite"
 				}
 			],
-			"startDate": "01/20/2025",
-			"endDate": "01/25/2025"
+			"startDate": "2025-01-20T09:00:00.000Z",
+			"endDate": "2025-01-25T17:00:00.000Z"
 		}
 	],
 	"total": 65
 }
 ```
 
-<Snippet file="date-formatting-note" />
-
-<Note>
-	**Humanized Data:** - **Dates** are formatted according to the requested
-	locale - **All text fields** are localized when available
-</Note>
-
-<Snippet file="pagination-note" />
+<PaginationNote />
 
 #### Error Responses
 
-<Snippet file="common-error-responses" />
-
-<ResponseField name="404" type="Not Found">
-	Start Date, End Date, or Center ID not found
-</ResponseField>
+<CommonErrorResponses />

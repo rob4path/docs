@@ -3,15 +3,19 @@ title: 'GET /orders/list'
 description: 'Get a list of orders within a specified date range.'
 ---
 
-<Snippet file="humanized-format-note" />
+import HumanizedFormatNote from '/snippets/humanized-format-note.mdx';
+import AuthenticationInfo from '/snippets/authentication-info.mdx';
+import DateRangeParams from '/snippets/date-range-params.mdx';
+
+<HumanizedFormatNote />
 
 #### Authentication
 
-<Snippet file="authentication-info" />
+<AuthenticationInfo />
 
 #### Query Params
 
-<Snippet file="date-range-params" />
+<DateRangeParams />
 
 <ParamField path="formatDates" type="boolean" default="false">
 	Whether to format dates according to the locale. When set to `true`, dates
