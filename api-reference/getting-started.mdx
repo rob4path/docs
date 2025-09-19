@@ -3,6 +3,16 @@ title: 'Getting Started'
 description: 'Quick start guide for integrating with the Teamm API'
 ---
 
+import { BASE_URL } from '/snippets/base-url.mdx';
+
+## Base URL
+
+All API requests should be made to:
+
+```
+{BASE_URL}
+```
+
 ## Prerequisites
 
 Before you begin, ensure you have:
@@ -10,6 +20,21 @@ Before you begin, ensure you have:
 -   A Teamm center account with API access enabled
 -   API keys from your center's settings
 -   Basic understanding of REST APIs
+
+## Authentication
+
+All API endpoints require authentication. Please see the [Authentication](/api-reference/authentication) page for detailed information about required headers and how to obtain your API keys.
+
+## Data Format
+
+The Teamm API returns data in **humanized format**, meaning all information is localized and ready for display in your application. Use the `X-LOCALE` header to specify your preferred language.
+
+## Rate Limits
+
+The API has the following rate limits:
+
+-   **1000 requests per hour** per API key
+-   **Burst limit**: 100 requests per minute
 
 ## Quick Start
 
@@ -29,7 +54,7 @@ Here's a simple example to get started:
 <CodeGroup>
 
 ```bash cURL
-curl -X GET "https://api.teamm.com/v1/guests" \
+curl -X GET "{BASE_URL}/guests" \
   -H "X-API-APP-ID: your-app-id" \
   -H "X-API-PUBLIC-KEY: your-public-key" \
   -H "X-API-SECRET-KEY: your-secret-key" \
@@ -42,7 +67,7 @@ curl -X GET "https://api.teamm.com/v1/guests" \
 
 ```javascript JavaScript
 const response = await fetch(
-	'https://api.teamm.com/v1/guests?' +
+	'{BASE_URL}/guests?' +
 		new URLSearchParams({
 			startDate: '2025-01-01',
 			endDate: '2025-01-31',
@@ -66,7 +91,7 @@ console.log(data);
 ```python Python
 import requests
 
-url = "https://api.teamm.com/v1/guests"
+url = "{BASE_URL}/guests"
 headers = {
     "X-API-APP-ID": "your-app-id",
     "X-API-PUBLIC-KEY": "your-public-key",
@@ -112,74 +137,3 @@ The API returns data in this format:
 	"total": 1
 }
 ```
-
-## Common Integration Patterns
-
-### Sync Guest Data
-
-```javascript
-// Poll for new/updated guests every hour
-setInterval(async () => {
-	const guests = await fetchGuests({
-		startDate: new Date().toISOString().split('T')[0],
-		endDate: new Date().toISOString().split('T')[0],
-	});
-
-	// Process new guests
-	guests.data.forEach((guest) => {
-		updateLocalDatabase(guest);
-	});
-}, 3600000);
-```
-
-### Handle Pagination
-
-```javascript
-async function getAllGuests(startDate, endDate) {
-	let allGuests = [];
-	let currentPage = 1;
-	let totalPages = 1;
-
-	do {
-		const response = await fetchGuests({
-			startDate,
-			endDate,
-			start: currentPage,
-			length: 50,
-		});
-
-		allGuests = allGuests.concat(response.data);
-		totalPages = Math.ceil(response.total / 50);
-		currentPage++;
-	} while (currentPage <= totalPages);
-
-	return allGuests;
-}
-```
-
-## Error Handling
-
-Always handle potential errors in your API calls:
-
-```javascript
-try {
-	const response = await fetch(url, { headers });
-
-	if (!response.ok) {
-		throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-	}
-
-	const data = await response.json();
-	return data;
-} catch (error) {
-	console.error('API Error:', error.message);
-	// Handle error appropriately
-}
-```
-
-## Next Steps
-
--   Explore the [Authentication](/api-reference/authentication) guide
--   Browse available [Endpoints](/api-reference/endpoint/get-guests)
--   Learn about [field projection](/api-reference/endpoint/get-guests#project-parameter) to optimize responses
--   Check out [common use cases](#common-integration-patterns)

@@ -55,21 +55,19 @@
 		{
 			"group": "API Reference",
 			"pages": [
-				"api-reference/introduction",
 				"api-reference/getting-started",
-				"api-reference/authentication",
-				"api-reference/error-handling"
+				"api-reference/authentication"
 			]
 		},
 		{
 			"group": "Endpoints",
 			"pages": [
-				"api-reference/endpoint/get-guests",
+				"api-reference/endpoint/create-app",
 				"api-reference/endpoint/get-guests-list",
-				"api-reference/endpoint/get-orders",
-				"api-reference/endpoint/get-order-by-uuid",
+				"api-reference/endpoint/get-guests",
 				"api-reference/endpoint/get-sessions",
-				"api-reference/endpoint/create-app"
+				"api-reference/endpoint/get-orders",
+				"api-reference/endpoint/get-order-by-uuid"
 			]
 		}
 	],

@@ -21,9 +21,9 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 
 <Note>
 	**Required Parameters:** You must provide either (`startDate` AND `endDate`)
-	OR (`sessionId` OR `sessionIds`) to filter the results.
-	
-	**Optional Filters:** `sessionIdsExclude` can be used with `startDate` and `endDate` to exclude specific sessions from the date range.
+	OR (`sessionId` OR `sessionIds`) to filter the results. **Optional
+	Filters:** `sessionIdsExclude` can be used with `startDate` and `endDate` to
+	exclude specific sessions from the date range.
 </Note>
 
 <ParamField path="startDate" type="Date">
@@ -48,8 +48,8 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 
 <ParamField path="sessionIdsExclude" type="array">
 	Exclude guests from specific session IDs. Can be used in combination with
-	startDate and endDate parameters to filter out specific sessions from a date range.
-	Provide as comma-separated values (e.g., "sess1,sess2,sess3").
+	startDate and endDate parameters to filter out specific sessions from a date
+	range. Provide as comma-separated values (e.g., "sess1,sess2,sess3").
 </ParamField>
 
 <ParamField path="role" type="'patient' | 'companion' | 'guest'">
