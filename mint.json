@@ -33,6 +33,10 @@
 		{
 			"name": "API Reference",
 			"url": "api-reference"
+		},
+		{
+			"name": "App Interface",
+			"url": "app-interface"
 		}
 	],
 	"anchors": [
@@ -69,6 +73,15 @@
 				"api-reference/endpoint/get-orders",
 				"api-reference/endpoint/get-order-by-uuid"
 			]
+		},
+		{
+			"group": "App Interface",
+			"pages": ["app-interface/overview", "app-interface/getting-started"]
+		},
+
+		{
+			"group": "Guest Management",
+			"pages": ["app-interface/guests/meal-preferences"]
 		}
 	],
 	"footerSocials": {

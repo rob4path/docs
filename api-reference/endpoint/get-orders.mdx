@@ -1,5 +1,5 @@
 ---
-title: 'GET /orders/list'
+title: 'GET /orders'
 description: 'Get a list of orders within a specified date range.'
 ---
 
@@ -32,13 +32,13 @@ import DateRangeParams from '/snippets/date-range-params.mdx';
 **Basic request:**
 
 ```bash
-GET /orders/list?startDate=2025-01-01&endDate=2025-01-31
+GET /orders?startDate=2025-01-01&endDate=2025-01-31
 ```
 
 **With formatted dates and guest names:**
 
 ```bash
-GET /orders/list?startDate=2025-01-01&endDate=2025-01-31&formatDates=true&includeGuestNames=true
+GET /orders?startDate=2025-01-01&endDate=2025-01-31&formatDates=true&includeGuestNames=true
 ```
 
 #### Response

@@ -1,0 +1,172 @@
+---
+title: Guest Meal Preferences - User Guide
+description: How to manage guest meal skipping preferences for kitchen planning and guest services
+---
+
+# Guest Meal Preferences - User Guide
+
+A simple tool to track which meals guests will skip during their stay. This helps kitchen staff plan portions accurately and ensures guests get the service they need.
+
+## Who Can Use This Feature
+
+You need the **"Guest Meal Skipping"** permission to access this feature. If you don't see the meal preferences button, contact your administrator to get access.
+
+**Typically used by:**
+
+-   Kitchen staff for meal planning
+-   Guest services for handling requests
+-   Reception staff during check-in
+-   Supervisors for oversight
+
+## How to Open Meal Preferences
+
+1. Go to the **Guests** section
+2. Find and click on a guest's name
+3. Look for the **🍽️ fork and knife icon** button
+4. Click it to open the meal preferences sidebar
+
+## Understanding the Interface
+
+### What You'll See
+
+The interface shows a schedule grid where:
+
+-   **Each row** = One day of the guest's stay
+-   **Each column** = A meal type (Breakfast, Lunch, Dinner)
+-   **Gray "DEFAULT" buttons** = Guest will eat this meal if provided by center (normal)
+-   **Red "SKIPPING" buttons** = Guest will skip this meal (exception)
+
+### Key Principle
+
+**Guests eat all meals by default.** You only mark the meals they want to skip.
+
+## Daily Tasks
+
+### For Kitchen Staff
+
+#### When Guests Make Changes
+
+1. Find the guest in the system
+2. Open their meal preferences
+3. Click the meal button to change from DEFAULT to SKIPPING
+4. The change saves automatically
+
+### For Guest Services
+
+#### During Check-in
+
+1. Ask the guest: _"Will you be eating all meals with us, or would you like to skip any?"_
+2. Open their meal preferences
+3. Click to mark any meals they want to skip as **red "SKIPPING"**
+4. The schedule shows their entire stay - mark all the meals they won't attend
+
+#### Handling Special Requests
+
+-   Guest wants to skip all breakfasts: Use **"All Skipping Breakfasts"** button
+-   Guest wants to skip one specific day: Use the **day action buttons** (🚫 or ✅)
+-   Guest changes their mind: Click the meal button to toggle back to DEFAULT
+
+### For Reception Staff
+
+#### Guest Registration
+
+1. During registration, ask about meal preferences
+2. Open the guest's meal preferences
+3. Mark any meals they plan to skip
+4. This helps kitchen staff from day one
+
+## Using the Controls
+
+### Individual Meal Buttons
+
+-   **Click any meal button** to toggle between DEFAULT (gray) and SKIPPING (red)
+-   Changes happen instantly - no need to save manually
+
+### Bulk Actions (Top Section)
+
+-   **"All Skipping"** - Guest skips every meal (rare, for special cases)
+-   **"All Attending"** - Reset everything to default (guest eats all meals)
+-   **"Skipping All Breakfasts"** - Skip just breakfasts for entire stay
+-   **"Skipping All Lunches"** - Skip just lunches for entire stay
+-   **"Skipping All Dinners"** - Skip just dinners for entire stay
+
+### Day Actions (Right Side)
+
+-   **🚫 Red button** - Skip all meals for that specific day
+-   **✅ Green button** - Attend all meals for that specific day
+
+## Common Scenarios
+
+### Guest Arrives Late (Misses Dinner)
+
+1. Find their arrival date in the schedule
+2. Click the **Dinner** button for that day to mark it as SKIPPING (red)
+
+### Guest Leaves Early (Misses Lunch & Dinner)
+
+1. Find their departure date
+2. Click the **Lunch** and **Dinner** buttons to mark as SKIPPING (red)
+
+### Guest Has Medical Appointment
+
+1. Ask which meals they'll miss
+2. Click those specific meal buttons to mark as SKIPPING (red)
+
+### Guest Goes Out for Special Dinner
+
+1. Find the date they're going out
+2. Click the **Dinner** button for that day to mark as SKIPPING (red)
+
+### Business Traveler (Skips All Breakfasts)
+
+1. Use the **"Skipping All Breakfasts"** bulk action button
+2. All breakfast buttons turn red instantly
+
+## Reading the Statistics
+
+At the bottom, you'll see summary counts:
+
+-   **Breakfast: 3 Skipping** = Guest will skip 3 breakfasts during their stay
+-   **Lunch: 0 Skipping** = Guest attends all lunches
+-   **Dinner: 1 Skipping** = Guest will skip 1 dinner
+
+Kitchen staff use these numbers for weekly planning.
+
+## API Access for Developers
+
+### Retrieving Meal Preferences via API
+
+You can programmatically access guest meal skipping information using the [GET /guests API endpoint](/api-reference/endpoint/get-guests) by including `skippingMeals` in your project parameters.
+
+#### Example API Request
+
+```bash
+GET /guests?startDate=2025-01-01&endDate=2025-01-31&project=firstName,lastName,skippingMeals
+```
+
+#### Response Format
+
+```json
+{
+	"data": [
+		{
+			"firstName": "John",
+			"lastName": "Doe",
+			"skippingMeals": {
+				"breakfast": ["2025-01-15", "2025-01-16"], // dates when skipping breakfast
+				"lunch": [], // no lunch skipping
+				"dinner": ["2025-01-18"] // dates when skipping dinner
+			}
+		}
+	]
+}
+```
+
+#### Integration Use Cases
+
+-   **Kitchen Management Systems**: Automatically calculate daily meal counts
+-   **Food Ordering Systems**: Adjust ingredient orders based on skipping patterns
+-   **Reporting Tools**: Generate meal attendance reports
+-   **Mobile Apps**: Display meal schedules to guests
+
+Learn more about API integration in our [API Reference documentation](/api-reference/getting-started).
