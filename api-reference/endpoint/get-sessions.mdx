@@ -1,5 +1,5 @@
 ---
-title: 'GET /sessions/list'
+title: 'GET /sessions'
 description: 'Get a list of sessions within a specified date range.'
 ---
 
@@ -17,11 +17,11 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 #### Query Params
 
 <ParamField path="startDate" type="Date" required>
-	Filter by start date (from this date). Format: IsoString
+	Filter by start date (from this date). Format: ISOString
 </ParamField>
 
 <ParamField path="endDate" type="Date" required>
-	Filter by end date (to this date). Format: IsoString
+	Filter by end date (to this date). Format: ISOString
 </ParamField>
 
 <PaginationParams />
@@ -29,7 +29,7 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 #### Example Request
 
 ```bash
-GET /sessions/list?startDate=2025-01-01T00:00:00.000Z&endDate=2025-01-31T23:59:59.999Z&start=1&length=25
+GET /sessions?startDate=2025-01-01T00:00:00.000Z&endDate=2025-01-31T23:59:59.999Z&start=1&length=25
 ```
 
 #### Response
