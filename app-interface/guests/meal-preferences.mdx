@@ -105,7 +105,7 @@ The interface shows a schedule grid where:
 
 -   **Click any meal button** to toggle between DEFAULT (gray) and SKIPPING (red)
 
-### Bulk Actions (Top Section)
+### Bulk Actions
 
 -   **"All Skipping"** - Guest skips every meal (rare, for special cases)
 -   **"All Attending"** - Reset everything to default (guest eats all meals)
@@ -155,11 +155,77 @@ At the bottom, you'll see summary counts:
 
 Kitchen staff use these numbers for weekly planning.
 
+## Meal Skipping Report View
+
+For analyzing meal skipping patterns across all guests, you can access the comprehensive **Meal Skipping Report** view directly in the main guests table.
+
+### How to Access the Report
+
+1. Go to the main **Guests** section
+2. Create a new view
+3. Select **"Meal Skipping Report"** from the dropdown
+4. The table will switch to show meal skipping analytics
+
+### Filtering Options
+
+The report view provides flexible filtering options:
+
+#### Filter by Session ID
+
+-   Select a specific session from the **Session** dropdown
+-   View meal skipping patterns for all guests in that session
+-   Perfect for session-specific kitchen planning
+
+#### Filter by Date Range
+
+-   Use the **Date Range** picker to select custom start and end dates
+-   View meal skipping patterns across multiple sessions
+-   Ideal for weekly or monthly kitchen planning
+
+### What You'll See
+
+The Meal Skipping Report displays:
+
+-   **Summary Statistics** at the top showing total guests and skipping patterns
+-   **Daily Breakdown** with meal skipping counts for each date
+-   **Individual Guest Data** showing complete skipping patterns per guest
+
+### Using the Report for Kitchen Planning
+
+#### Daily Planning
+
+1. Filter by the dates you want to plan for
+2. Look at the **Daily Breakdown** section
+3. Note the skipping counts for each meal type
+4. Calculate portions: Total Guests - Skipping Count = Meals to Prepare
+
+#### Session Planning
+
+1. Select a specific session ID
+2. Review the complete meal skipping patterns
+3. Plan ingredient orders based on total skipping statistics
+4. Identify patterns (e.g., many guests skip breakfast)
+
+<Tip>
+	**Pro Tip**: Use the date range filter to compare meal skipping patterns
+	between different weeks or months to identify trends and optimize your
+	kitchen operations.
+</Tip>
+
 ## API Access for Developers
 
 ### Retrieving Meal Preferences via API
 
 You can programmatically access guest meal skipping information using the [GET /guests API endpoint](/api-reference/endpoint/get-guests) by including `skippingMeals` in your project parameters.
+
+### Comprehensive Meal Skipping Reports
+
+For comprehensive analytics and kitchen planning, use the dedicated [GET /guests/meal-skipping API endpoint](/api-reference/endpoint/get-guests-meal-skipping) which provides:
+
+-   **Summary statistics** - Total guests and skipping patterns
+-   **Daily breakdown** - Meal counts by date for kitchen planning
+-   **Individual tracking** - Complete skipping history per guest
+-   **Kitchen analytics** - Ready-to-use data for portion planning
 
 #### Example API Request
 

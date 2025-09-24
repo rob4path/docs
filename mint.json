@@ -69,6 +69,7 @@
 				"api-reference/endpoint/create-app",
 				"api-reference/endpoint/get-guests-list",
 				"api-reference/endpoint/get-guests",
+				"api-reference/endpoint/get-guests-meal-skipping",
 				"api-reference/endpoint/get-sessions",
 				"api-reference/endpoint/get-orders",
 				"api-reference/endpoint/get-order-by-uuid"

@@ -1,0 +1,423 @@
+---
+title: 'Get Guests Meal Skipping Report'
+api: 'GET guests/meal-skipping'
+description: 'Retrieve comprehensive meal skipping analytics for kitchen planning and portion control'
+---
+
+<Note>
+	**Humanized Format**: All responses from this endpoint return humanized data
+	optimized for readability and direct use in user interfaces.
+</Note>
+
+This endpoint provides comprehensive analytics for kitchen staff to plan meal preparation based on guest meal skipping patterns. It helps optimize food preparation and reduce waste during guest sessions.
+
+Learn more about using meal skipping data in the [Guest Meal Skipping User Guide](/app-interface/guests/meal-preferences).
+
+## Authentication
+
+<Snippet file="authentication.mdx" />
+
+## Query Parameters
+
+The API supports two modes of querying: by session ID or by date range.
+
+### Option 1: Query by Session ID
+
+<ParamField query="sessionId" type="string" required>
+	The ID of the session to analyze for meal skipping patterns
+</ParamField>
+
+### Option 2: Query by Date Range
+
+<ParamField query="startDate" type="string" required>
+	Start date in ISO format (YYYY-MM-DD). Required when not using sessionId.
+</ParamField>
+
+<ParamField query="endDate" type="string" required>
+	End date in ISO format (YYYY-MM-DD). Required when not using sessionId.
+</ParamField>
+
+<Warning>
+	Either `sessionId` OR both `startDate` and `endDate` must be provided.
+</Warning>
+
+## Response
+
+<ResponseField name="summary" type="object">
+	High-level statistics about meal skipping patterns
+	<Expandable title="properties">
+		<ResponseField name="totalGuests" type="number">
+			Total number of guests in the analysis
+		</ResponseField>
+		<ResponseField name="guestsWithSkipping" type="number">
+			Number of guests who skipped at least one meal
+		</ResponseField>
+		<ResponseField name="datesWithSkipping" type="array">
+			Array of dates where meal skipping occurred
+		</ResponseField>
+		<ResponseField name="mealsAffected" type="array">
+			Array of meal types affected (breakfast, lunch, dinner)
+		</ResponseField>
+	</Expandable>
+</ResponseField>
+
+<ResponseField name="byDate" type="object">
+	Meal skipping data organized by date
+	<Expandable title="properties">
+		<ResponseField name="[date]" type="object">
+			Data for each specific date
+			<Expandable title="properties">
+				<ResponseField name="breakfast" type="object">
+					<Expandable title="properties">
+						<ResponseField name="count" type="number">
+							Number of guests skipping breakfast
+						</ResponseField>
+						<ResponseField name="guests" type="array">
+							List of guests skipping breakfast
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+				<ResponseField name="lunch" type="object">
+					<Expandable title="properties">
+						<ResponseField name="count" type="number">
+							Number of guests skipping lunch
+						</ResponseField>
+						<ResponseField name="guests" type="array">
+							List of guests skipping lunch
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+				<ResponseField name="dinner" type="object">
+					<Expandable title="properties">
+						<ResponseField name="count" type="number">
+							Number of guests skipping dinner
+						</ResponseField>
+						<ResponseField name="guests" type="array">
+							List of guests skipping dinner
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+			</Expandable>
+		</ResponseField>
+	</Expandable>
+</ResponseField>
+
+<ResponseField name="byGuest" type="object">
+	Meal skipping data organized by individual guest
+	<Expandable title="properties">
+		<ResponseField name="[guestId]" type="object">
+			Data for each guest who has meal skipping
+			<Expandable title="properties">
+				<ResponseField name="name" type="string">
+					Guest's full name
+				</ResponseField>
+				<ResponseField name="skippedMeals" type="array">
+					Chronological list of skipped meals
+					<Expandable title="properties">
+						<ResponseField name="date" type="string">
+							Date of skipped meals
+						</ResponseField>
+						<ResponseField name="meals" type="array">
+							Array of meal types skipped on this date
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+				<ResponseField name="totalSkippedBreakfast" type="number">
+					Total breakfast meals skipped
+				</ResponseField>
+				<ResponseField name="totalSkippedLunch" type="number">
+					Total lunch meals skipped
+				</ResponseField>
+				<ResponseField name="totalSkippedDinner" type="number">
+					Total dinner meals skipped
+				</ResponseField>
+			</Expandable>
+		</ResponseField>
+	</Expandable>
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL (Session ID)
+curl -X GET \
+  "https://api.teammhq.com/guests/meal-skipping?sessionId=64f1234567890abcdef12345" \
+  -H "Authorization: Bearer your-api-key" \
+  -H "Content-Type: application/json"
+```
+
+```bash cURL (Date Range)
+curl -X GET \
+  "https://api.teammhq.com/guests/meal-skipping?startDate=2025-01-15&endDate=2025-01-22" \
+  -H "Authorization: Bearer your-api-key" \
+  -H "Content-Type: application/json"
+```
+
+```javascript JavaScript
+// Query by session ID
+const sessionResponse = await fetch(
+	'https://api.teammhq.com/guests/meal-skipping?sessionId=64f1234567890abcdef12345',
+	{
+		method: 'GET',
+		headers: {
+			Authorization: 'Bearer your-api-key',
+			'Content-Type': 'application/json',
+		},
+	}
+);
+
+// Query by date range
+const dateResponse = await fetch(
+	'https://api.teammhq.com/guests/meal-skipping?startDate=2025-01-15&endDate=2025-01-22',
+	{
+		method: 'GET',
+		headers: {
+			Authorization: 'Bearer your-api-key',
+			'Content-Type': 'application/json',
+		},
+	}
+);
+
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+# Query by session ID
+session_response = requests.get(
+    'https://api.teammhq.com/guests/meal-skipping',
+    params={'sessionId': '64f1234567890abcdef12345'},
+    headers={
+        'Authorization': 'Bearer your-api-key',
+        'Content-Type': 'application/json'
+    }
+)
+
+# Query by date range
+date_response = requests.get(
+    'https://api.teammhq.com/guests/meal-skipping',
+    params={
+        'startDate': '2025-01-15',
+        'endDate': '2025-01-22'
+    },
+    headers={
+        'Authorization': 'Bearer your-api-key',
+        'Content-Type': 'application/json'
+    }
+)
+
+data = response.json()
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Successful Response
+{
+	"summary": {
+		"totalGuests": 25,
+		"guestsWithSkipping": 8,
+		"datesWithSkipping": ["2025-01-15", "2025-01-16", "2025-01-17"],
+		"mealsAffected": ["breakfast", "lunch", "dinner"]
+	},
+	"byDate": {
+		"2025-01-15": {
+			"breakfast": {
+				"count": 3,
+				"guests": [
+					{
+						"id": "64f1234567890abcdef12345",
+						"name": "Sarah Johnson"
+					},
+					{
+						"id": "64f1234567890abcdef12346",
+						"name": "Michael Chen"
+					},
+					{
+						"id": "64f1234567890abcdef12347",
+						"name": "Emma Williams"
+					}
+				]
+			},
+			"lunch": {
+				"count": 2,
+				"guests": [
+					{
+						"id": "64f1234567890abcdef12345",
+						"name": "Sarah Johnson"
+					},
+					{
+						"id": "64f1234567890abcdef12348",
+						"name": "David Rodriguez"
+					}
+				]
+			},
+			"dinner": {
+				"count": 1,
+				"guests": [
+					{
+						"id": "64f1234567890abcdef12349",
+						"name": "Lisa Thompson"
+					}
+				]
+			}
+		},
+		"2025-01-16": {
+			"breakfast": {
+				"count": 2,
+				"guests": [
+					{
+						"id": "64f1234567890abcdef12346",
+						"name": "Michael Chen"
+					},
+					{
+						"id": "64f1234567890abcdef12347",
+						"name": "Emma Williams"
+					}
+				]
+			},
+			"lunch": {
+				"count": 0,
+				"guests": []
+			},
+			"dinner": {
+				"count": 1,
+				"guests": [
+					{
+						"id": "64f1234567890abcdef12345",
+						"name": "Sarah Johnson"
+					}
+				]
+			}
+		}
+	},
+	"byGuest": {
+		"64f1234567890abcdef12345": {
+			"name": "Sarah Johnson",
+			"skippedMeals": [
+				{ "date": "2025-01-15", "meals": ["breakfast", "lunch"] },
+				{ "date": "2025-01-16", "meals": ["dinner"] }
+			],
+			"totalSkippedBreakfast": 1,
+			"totalSkippedLunch": 1,
+			"totalSkippedDinner": 1
+		},
+		"64f1234567890abcdef12346": {
+			"name": "Michael Chen",
+			"skippedMeals": [
+				{ "date": "2025-01-15", "meals": ["breakfast"] },
+				{ "date": "2025-01-16", "meals": ["breakfast"] }
+			],
+			"totalSkippedBreakfast": 2,
+			"totalSkippedLunch": 0,
+			"totalSkippedDinner": 0
+		}
+	}
+}
+```
+
+```json Empty Response (No Guests Found)
+{
+	"summary": {
+		"totalGuests": 0,
+		"guestsWithSkipping": 0,
+		"datesWithSkipping": [],
+		"mealsAffected": []
+	},
+	"byDate": {},
+	"byGuest": {}
+}
+```
+
+```json Error: Missing Parameters
+{
+	"error": {
+		"code": "INVALID_PARAMETER",
+		"message": "Either sessionId or both startDate and endDate are required"
+	}
+}
+```
+
+```json Error: Invalid Date Range
+{
+	"error": {
+		"code": "INVALID_PARAMETER",
+		"message": "Both startDate and endDate are required when using date range"
+	}
+}
+```
+
+```json Error: Unauthorized
+{
+	"error": {
+		"code": "UNAUTHORIZED",
+		"message": "Invalid or missing API key"
+	}
+}
+```
+
+</ResponseExample>
+
+## Use Cases
+
+### Kitchen Planning
+
+Use the `byDate` section to plan daily meal preparation:
+
+```javascript
+// Calculate meals needed for each day
+const mealCounts = response.byDate;
+const totalGuests = response.summary.totalGuests;
+
+Object.keys(mealCounts).forEach((date) => {
+	const day = mealCounts[date];
+	console.log(`${date}:`);
+	console.log(`  Breakfast for ${totalGuests - day.breakfast.count} guests`);
+	console.log(`  Lunch for ${totalGuests - day.lunch.count} guests`);
+	console.log(`  Dinner for ${totalGuests - day.dinner.count} guests`);
+});
+```
+
+### Guest Management
+
+Use the `byGuest` section to track individual dietary patterns:
+
+```javascript
+// Find guests with frequent meal skipping
+const frequentSkippers = Object.values(response.byGuest)
+	.filter((guest) => {
+		const totalSkipped =
+			guest.totalSkippedBreakfast +
+			guest.totalSkippedLunch +
+			guest.totalSkippedDinner;
+		return totalSkipped > 3;
+	})
+	.map((guest) => guest.name);
+
+console.log('Guests with frequent meal skipping:', frequentSkippers);
+```
+
+### Summary Analytics
+
+Use the `summary` section for high-level insights:
+
+```javascript
+const { summary } = response;
+const skippingRate = (summary.guestsWithSkipping / summary.totalGuests) * 100;
+console.log(`${skippingRate.toFixed(1)}% of guests skip at least one meal`);
+console.log(`Most affected meals: ${summary.mealsAffected.join(', ')}`);
+```
+
+## Notes
+
+-   Only active guests are included (excludes cancelled, waiting list, and review status)
+-   Dates are returned in YYYY-MM-DD format
+-   Guest names are formatted as "FirstName LastName"
+-   Empty meal arrays indicate no skipping for that meal type
+-   All times are in the center's configured timezone
+-   Data is updated in real-time as guests modify their preferences
+
+<Snippet file="pagination.mdx" />
+
+<Snippet file="error-responses.mdx" />
