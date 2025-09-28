@@ -13,11 +13,11 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 
 <HumanizedFormatNote />
 
-#### Authentication
+## Authentication
 
 <AuthenticationInfo />
 
-#### Query Params
+## Query Parameters
 
 <Note>
 	**Required Parameters:** You must provide either (`startDate` AND `endDate`)
@@ -25,6 +25,8 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 	Filters:** `sessionIdsExclude` can be used with `startDate` and `endDate` to
 	exclude specific sessions from the date range.
 </Note>
+
+### Date & Session Filtering
 
 <ParamField path="startDate" type="Date">
 	Filter guests by start date (from this date). Required when not using
@@ -52,6 +54,8 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 	range. Provide as comma-separated values (e.g., "sess1,sess2,sess3").
 </ParamField>
 
+### Guest Filtering
+
 <ParamField path="role" type="'patient' | 'companion' | 'guest'">
 	Filter guests by their role
 </ParamField>
@@ -69,32 +73,166 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 	customer accepts the offer - `departed` - Guest has departed
 </ParamField>
 
+### Pagination
+
 <PaginationParams />
+
+### Field Projection
 
 <ParamField path="project" type="array">
   Specify which fields to include in the response. You can project customer fields, booking fields, and custom meta fields:
 
 **Customer Fields:**
 
--   `firstName`, `lastName`, `email`, `phone`, `secondaryPhone`
--   `dob`, `age`, `pin`, `gender`
--   `address.notes`, `address.city`, `address.zip`, `address.country`, `address.street`
--   `refferalType`, `religion`, `internalId`
+_Basic Personal Information:_
+
+-   `firstName` - Guest's first name
+-   `lastName` - Guest's last name
+-   `name` - Full name of the guest
+-   `firstNameCaps` - First name in uppercase
+-   `lastNameCaps` - Last name in uppercase
+-   `pin` - Personal identification number
+-   `internalId` - Internal system identifier
+
+_Contact Information:_
+
+-   `email` - Primary email address
+-   `phone` - Primary phone number
+-   `secondaryPhone` - Secondary/backup phone number
+
+_Personal Details:_
+
+-   `dob` - Date of birth
+-   `age` - Current age
+-   `gender` - Gender identification
+-   `religion` - Religious affiliation
+-   `birthDateDuringStay` - Whether the guest's birthday occurs during their current stay
+
+_Address Information:_
+
+-   `address.street` - Street address
+-   `address.city` - City
+-   `address.zip` - ZIP/postal code
+-   `address.country` - Country
+-   `address.notes` - Additional address notes
+
+_Referral & Background:_
+
+-   `refferalType` - How the guest was referred to the center
 
 **Booking Fields:**
 
--   `centerId`, `sessionId`, `sessionIds`, `programId`, `packageId`, `userId`
--   `status`, `role`, `isCompanionFor`, `practitionerIds`, `bookedAt`, `createdBy`
--   `startDate`, `endDate`, `bookingId`,
--   `medicalLetter.ultrasoundNotes`, `medicalLetter.ultrasoundStr`,
--   `medicalLetter.psychiatricExam`, `medicalLetter.diagnoses`, `medicalLetter.customRec`, `medicalLetter.ekg`, `medicalLetter.recommendationsIds`
--   `medicalData.notes`
--   `formData.medicalConditions`, `formData.observations`, `formData.mobility`, `formData.accomodationDetails`
--   `acc.roomId`, `acc.bedType`, `acc.type`, `acc.roomStandardId`, `acc.roomSize`, `acc.floor`, `acc.shareRoomWith`
--   `financial.subtotal`, `financial.discountIds`, `financial.total`
--   `financial.deposit.amount`, `financial.deposit.notes`, `financial.deposit.paidAt`, `financial.deposit.paymentType`
--   `financial.fullPayment.amount`, `financial.fullPayment.notes`, `financial.fullPayment.paidAt`, `financial.fullPayment.paymentType`
--   `skippingMeals` (if you use the meal management feature to skip meals for certain dates)
+_Basic Booking Information:_
+
+-   `bookingId` - Unique booking identifier
+-   `centerId` - ID of the center where booking is made
+-   `sessionId` - ID of the session
+-   `sessionIds` - Array of session IDs (for multi-session bookings)
+-   `programId` - ID of the program booked
+-   `packageId` - ID of the package selected
+-   `userId` - ID of the user who made the booking
+-   `startDate` - Booking start date
+-   `endDate` - Booking end date
+-   `bookedAt` - Timestamp when booking was made
+-   `createdBy` - Who created the booking
+
+_Booking Status & Role:_
+
+-   `status` - Current booking status (confirmed, cancelled, etc.)
+-   `role` - Guest's role (patient, companion, guest)
+-   `isCompanionFor` - ID of the patient this guest is accompanying
+-   `practitionerIds` - Array of assigned practitioner IDs
+
+_Medical Documentation:_
+
+-   `medicalLetter.ultrasoundNotes` - Ultrasound examination notes
+-   `medicalLetter.ultrasoundStr` - Ultrasound results string
+-   `medicalLetter.psychiatricExam` - Psychiatric examination results
+-   `medicalLetter.diagnoses` - Medical diagnoses
+-   `medicalLetter.customRec` - Custom medical recommendations
+-   `medicalLetter.ekg` - EKG test results
+-   `medicalLetter.recommendationsIds` - IDs of medical recommendations
+-   `medicalData.notes` - Additional medical notes
+
+_Health & Intake Forms:_
+
+-   `formData.medicalConditions` - Reported medical conditions
+-   `formData.observations` - Health observations
+-   `formData.mobility` - Mobility assessment
+-   `formData.accomodationDetails` - Special accommodation needs
+
+_Accommodation Details:_
+
+-   `acc.roomId` - Assigned room ID
+-   `acc.bedType` - Type of bed requested
+-   `acc.type` - Accommodation type
+-   `acc.roomStandardId` - Room standard/category ID
+-   `acc.roomSize` - Room size preference
+-   `acc.floor` - Floor preference
+-   `acc.shareRoomWith` - Roommate preferences
+
+_Financial Information:_
+
+-   `financial.subtotal` - Booking subtotal amount
+-   `financial.total` - Total booking amount
+-   `financial.discountIds` - Applied discount IDs
+-   `financial.deposit` - Complete deposit information (all fields)
+-   `financial.deposit.amount` - Deposit amount
+-   `financial.deposit.notes` - Deposit payment notes
+-   `financial.deposit.paidAt` - When deposit was paid
+-   `financial.deposit.paymentType` - Deposit payment method
+-   `financial.fullPayment` - Complete full payment information (all fields)
+-   `financial.fullPayment.amount` - Full payment amount
+-   `financial.fullPayment.notes` - Full payment notes
+-   `financial.fullPayment.paidAt` - When full payment was made
+-   `financial.fullPayment.paymentType` - Full payment method
+
+_Meal Management:_
+
+-   `skippingMeals` - Dates when guest will skip specific meals (for meal planning)
+
+**Historical & Future Session Data:**
+
+-   `sessionsAttendedBefore` - List of previous sessions the guest has completed
+-   `sessionsRegisteredFuture` - List of future sessions the guest is registered for
+-   `sessionsAttendedBeforeCount` - Total number of sessions attended in the past
+-   `sessionsRegisteredFutureCount` - Total number of future registered sessions
+-   `sessionInterval` - Date range of the session (e.g., "2025-06-01 to 2025-06-15")
+-   `sessionStartDate` - Start date of the session
+-   `sessionEndDate` - End date of the session
+
+**Additional Data Fields:**
+
+-   `birthDateDuringStay` - Whether the guest's birthday occurs during their current stay
+-   `doctorName` - Name of the assigned doctor
+-   `therapistName` - Name of the assigned therapist
+-   `name` - Full name of the guest
+-   `firstNameCaps` - First name in uppercase
+-   `lastNameCaps` - Last name in uppercase
+
+**Order & Booking Details:**
+
+-   `orderNumber` - Order number associated with the booking
+-   `orderStatus` - Current status of the order
+-   `isOrderMainGuest` - Whether this guest is the main guest for the order
+
+**Center Information:**
+
+-   `centerName` - Name of the center
+-   `centerAddressLine1` - First line of center address
+-   `centerAddressLine2` - Second line of center address
+-   `centerEmail` - Center's email address
+-   `centerPhone` - Center's phone number
+
+**Health Intake Measurements:**
+
+-   `idealWeight` - Target weight for the guest
+-   `idealCirc` - Target circumference measurements
+-   `weight1` - Initial weight measurement
+-   `weight2` - Follow-up weight measurement
+-   `height` - Guest's height
+-   `bmi1` - Initial BMI calculation
+-   `bmi2` - Follow-up BMI calculation
 
 **Custom Meta Fields:**
 
@@ -120,7 +258,7 @@ Example:
 
 </ParamField>
 
-#### Example Requests
+## Example Requests
 
 **Filter by date range:**
 
@@ -146,7 +284,7 @@ GET /guests?sessionIds=sess_123456,sess_789012,sess_345678&status=confirmed&star
 GET /guests?startDate=2025-01-01&endDate=2025-01-31&sessionIdsExclude=sess_999888,sess_777666&role=patient&start=1&length=25&project=firstName,lastName,email
 ```
 
-#### Response
+## Response
 
 The response returns data in a **humanized format**, meaning all information is localized and ready to be displayed to end users in the requested language.
 
@@ -185,6 +323,6 @@ The response returns data in a **humanized format**, meaning all information is 
 
 <PaginationNote />
 
-#### Error Responses
+## Error Responses
 
 <CommonErrorResponses />
