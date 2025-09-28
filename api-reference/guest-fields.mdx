@@ -48,12 +48,13 @@ This page provides a comprehensive reference of all fields available when using 
 ### Basic Booking Information
 
 -   `bookingId` - Unique booking identifier that is generated automatically or manually:
-    - **Automatic Generation**: Created when the booking status changes to `arrived` if the center has enabled automatic booking IDs in settings
-    - **Manual Generation**:
+
+    -   **Automatic Generation**: Created when the booking status changes to `arrived` if the center has enabled automatic booking IDs in settings
+    -   **Manual Generation**:
         a. Can be bulk updated through the guests table interface if the center has enabled automatic booking IDs in settings
         b. Can be set manually via the booking creation or editing forms
-    - **Format for automatic generation**: `YY-SN-BN` where YY = year, SN = session number (or session name), BN = booking sequence number
-    - **Example**: `24-01-01` represents the first booking in session 01 of 2024
+    -   **Format for automatic generation**: `YY-SN-BN` where YY = year, SN = session number (or session name), BN = booking sequence number
+    -   **Example**: `24-01-01` represents the first booking in session 01 of 2024
 
 -   `centerId` - ID of the center where booking is made
 -   `programId` - Name of the program booked
@@ -168,37 +169,44 @@ To find the available meta keys for your center:
 4. Use it in the format `meta.<key-name>`
 
 **Example:**
+
 ```
 project=firstName,lastName,meta.food-allergies
 ```
 
 <Note>
-If it's a meta you created, include the prefix `meta.` before the key name. If it's a customer or booking field, just use the field name directly.
+	If it's a meta you created, include the prefix `meta.` before the key name.
+	If it's a customer or booking field, just use the field name directly.
 </Note>
 
 ## Usage Examples
 
 ### Basic Guest Information
+
 ```bash
 project=firstName,lastName,email,phone,startDate,endDate
 ```
 
 ### Financial Data
+
 ```bash
 project=firstName,lastName,financial.total,financial.deposit.amount,financial.fullPayment.paidAt
 ```
 
 ### Medical Information
+
 ```bash
 project=firstName,lastName,doctorName,therapistName,medicalData.notes,formData.medicalConditions
 ```
 
 ### Meal Planning
+
 ```bash
 project=firstName,lastName,startDate,endDate,skippingMeals
 ```
 
 ### Session History
+
 ```bash
 project=firstName,lastName,sessionsAttendedBeforeCount,sessionsRegisteredFutureCount
 ```
