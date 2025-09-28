@@ -124,52 +124,43 @@ _Referral & Background:_
 
 _Basic Booking Information:_
 
--   `bookingId` - Unique booking identifier
+-   `bookingId` - Unique booking identifier that is generated automatically or manually:
+
+    -   **Automatic Generation**: Created when the booking status changes to `arrived` if the center has enabled automatic booking IDs in settings
+    -   **Manual Generation**:
+        a. Can be bulk updated through the guests table interface if the center has enabled automatic booking IDs in settings
+        b. Can be set manually via the booking creation or editing forms
+    -   **Format for automatic generation**: `YY-SN-BN` where YY = year, SN = session number (or session name), BN = booking sequence number
+    -   **Example**: `24-01-01` represents the first booking in session 01 of 2024
+
 -   `centerId` - ID of the center where booking is made
--   `sessionId` - ID of the session
--   `sessionIds` - Array of session IDs (for multi-session bookings)
--   `programId` - ID of the program booked
--   `packageId` - ID of the package selected
--   `userId` - ID of the user who made the booking
+-   `programId` - Name of the program booked
+-   `packageId` - Name of the package selected
 -   `startDate` - Booking start date
 -   `endDate` - Booking end date
--   `bookedAt` - Timestamp when booking was made
+-   `bookedAt` - Date when booking was made
 -   `createdBy` - Who created the booking
 
 _Booking Status & Role:_
 
 -   `status` - Current booking status (confirmed, cancelled, etc.)
 -   `role` - Guest's role (patient, companion, guest)
--   `isCompanionFor` - ID of the patient this guest is accompanying
--   `practitionerIds` - Array of assigned practitioner IDs
 
-_Medical Documentation:_
+_Order & Booking Details:_
 
--   `medicalLetter.ultrasoundNotes` - Ultrasound examination notes
--   `medicalLetter.ultrasoundStr` - Ultrasound results string
--   `medicalLetter.psychiatricExam` - Psychiatric examination results
--   `medicalLetter.diagnoses` - Medical diagnoses
--   `medicalLetter.customRec` - Custom medical recommendations
--   `medicalLetter.ekg` - EKG test results
--   `medicalLetter.recommendationsIds` - IDs of medical recommendations
--   `medicalData.notes` - Additional medical notes
-
-_Health & Intake Forms:_
-
--   `formData.medicalConditions` - Reported medical conditions
--   `formData.observations` - Health observations
--   `formData.mobility` - Mobility assessment
--   `formData.accomodationDetails` - Special accommodation needs
+-   `orderNumber` - Order number associated with the booking
+-   `orderStatus` - Current status of the order
+-   `isOrderMainGuest` - Whether this guest is the main guest for the order
 
 _Accommodation Details:_
 
+-   `formData.accomodationDetails` - Special accommodation needs
 -   `acc.roomId` - Assigned room ID
 -   `acc.bedType` - Type of bed requested
 -   `acc.type` - Accommodation type
 -   `acc.roomStandardId` - Room standard/category ID
 -   `acc.roomSize` - Room size preference
 -   `acc.floor` - Floor preference
--   `acc.shareRoomWith` - Roommate preferences
 
 _Financial Information:_
 
@@ -187,11 +178,39 @@ _Financial Information:_
 -   `financial.fullPayment.paidAt` - When full payment was made
 -   `financial.fullPayment.paymentType` - Full payment method
 
+_Health & Intake Forms at registration:_
+
+-   `formData.medicalConditions` - Reported medical conditions
+-   `formData.observations` - Health observations
+-   `formData.mobility` - Mobility assessment
+
+_Medical Documentation:_
+
+-   `medicalLetter.ultrasoundNotes` - Ultrasound examination notes
+-   `medicalLetter.ultrasoundStr` - Ultrasound results string
+-   `medicalLetter.psychiatricExam` - Psychiatric examination results
+-   `medicalLetter.diagnoses` - Medical diagnoses
+-   `medicalLetter.customRec` - Custom medical recommendations
+-   `medicalLetter.ekg` - EKG test results
+-   `medicalLetter.recommendationsIds` - IDs of medical recommendations
+-   `medicalData.notes` - Additional medical notes
+
+-   `doctorName` - Name of the assigned doctor
+-   `therapistName` - Name of the assigned therapist
+
+-   `idealWeight` - Target weight for the guest
+-   `idealCirc` - Target circumference measurements
+-   `weight1` - Initial weight measurement
+-   `weight2` - Follow-up weight measurement
+-   `height` - Guest's height
+-   `bmi1` - Initial BMI calculation
+-   `bmi2` - Follow-up BMI calculation
+
 _Meal Management:_
 
 -   `skippingMeals` - Dates when guest will skip specific meals (for meal planning)
 
-**Historical & Future Session Data:**
+_Historical & Future Session Data:_
 
 -   `sessionsAttendedBefore` - List of previous sessions the guest has completed
 -   `sessionsRegisteredFuture` - List of future sessions the guest is registered for
@@ -201,20 +220,9 @@ _Meal Management:_
 -   `sessionStartDate` - Start date of the session
 -   `sessionEndDate` - End date of the session
 
-**Additional Data Fields:**
+_Additional Data Fields:_
 
 -   `birthDateDuringStay` - Whether the guest's birthday occurs during their current stay
--   `doctorName` - Name of the assigned doctor
--   `therapistName` - Name of the assigned therapist
--   `name` - Full name of the guest
--   `firstNameCaps` - First name in uppercase
--   `lastNameCaps` - Last name in uppercase
-
-**Order & Booking Details:**
-
--   `orderNumber` - Order number associated with the booking
--   `orderStatus` - Current status of the order
--   `isOrderMainGuest` - Whether this guest is the main guest for the order
 
 **Center Information:**
 
@@ -223,16 +231,6 @@ _Meal Management:_
 -   `centerAddressLine2` - Second line of center address
 -   `centerEmail` - Center's email address
 -   `centerPhone` - Center's phone number
-
-**Health Intake Measurements:**
-
--   `idealWeight` - Target weight for the guest
--   `idealCirc` - Target circumference measurements
--   `weight1` - Initial weight measurement
--   `weight2` - Follow-up weight measurement
--   `height` - Guest's height
--   `bmi1` - Initial BMI calculation
--   `bmi2` - Follow-up BMI calculation
 
 **Custom Meta Fields:**
 
