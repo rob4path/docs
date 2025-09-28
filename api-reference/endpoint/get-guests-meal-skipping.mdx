@@ -135,14 +135,14 @@ The API supports two modes of querying: by session ID or by date range.
 
 ```bash cURL (Session ID)
 curl -X GET \
-  "https://api.teammhq.com/guests/meal-skipping?sessionId=64f1234567890abcdef12345" \
+  "https://api.teamm.work/guests/meal-skipping-report?sessionId=64f1234567890abcdef12345" \
   -H "Authorization: Bearer your-api-key" \
   -H "Content-Type: application/json"
 ```
 
 ```bash cURL (Date Range)
 curl -X GET \
-  "https://api.teammhq.com/guests/meal-skipping?startDate=2025-01-15&endDate=2025-01-22" \
+  "https://api.teamm.work/guests/meal-skipping-report?startDate=2025-01-15&endDate=2025-01-22" \
   -H "Authorization: Bearer your-api-key" \
   -H "Content-Type: application/json"
 ```
@@ -150,7 +150,7 @@ curl -X GET \
 ```javascript JavaScript
 // Query by session ID
 const sessionResponse = await fetch(
-	'https://api.teammhq.com/guests/meal-skipping?sessionId=64f1234567890abcdef12345',
+	'https://api.teamm.work/guests/meal-skipping-report?sessionId=64f1234567890abcdef12345',
 	{
 		method: 'GET',
 		headers: {
@@ -162,7 +162,7 @@ const sessionResponse = await fetch(
 
 // Query by date range
 const dateResponse = await fetch(
-	'https://api.teammhq.com/guests/meal-skipping?startDate=2025-01-15&endDate=2025-01-22',
+	'https://api.teamm.work/guests/meal-skipping-report?startDate=2025-01-15&endDate=2025-01-22',
 	{
 		method: 'GET',
 		headers: {
@@ -180,7 +180,7 @@ import requests
 
 # Query by session ID
 session_response = requests.get(
-    'https://api.teammhq.com/guests/meal-skipping',
+    'https://api.teamm.work/guests/meal-skipping-report',
     params={'sessionId': '64f1234567890abcdef12345'},
     headers={
         'Authorization': 'Bearer your-api-key',
@@ -190,7 +190,7 @@ session_response = requests.get(
 
 # Query by date range
 date_response = requests.get(
-    'https://api.teammhq.com/guests/meal-skipping',
+    'https://api.teamm.work/guests/meal-skipping-report',
     params={
         'startDate': '2025-01-15',
         'endDate': '2025-01-22'
@@ -412,7 +412,3 @@ console.log(`Most affected meals: ${summary.mealsAffected.join(', ')}`);
 -   Empty meal arrays indicate no skipping for that meal type
 -   All times are in the center's configured timezone
 -   Data is updated in real-time as guests modify their preferences
-
-<Snippet file="pagination.mdx" />
-
-<Snippet file="error-responses.mdx" />
