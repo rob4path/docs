@@ -29,14 +29,16 @@ import CommonErrorResponses from '/snippets/common-error-responses.mdx';
 
 ### Date & Session Filtering
 
-<ParamField path="startDate" type="Date">
+<ParamField path="startDate" type="string">
 	Filter guests by start date (from this date). Required when not using
-	sessionId/sessionIds.
+	sessionId/sessionIds. Must be in ISO string format (e.g.,
+	"2025-01-01T00:00:00.000Z" or "2025-01-01").
 </ParamField>
 
-<ParamField path="endDate" type="Date">
+<ParamField path="endDate" type="string">
 	Filter guests by end date (to this date). Required when not using
-	sessionId/sessionIds.
+	sessionId/sessionIds. Must be in ISO string format (e.g.,
+	"2025-01-31T23:59:59.999Z" or "2025-01-31").
 </ParamField>
 
 <ParamField path="sessionId" type="string">
@@ -147,6 +149,8 @@ The response returns data in a **humanized format**, meaning all information is 
 				"status": "confirmed",
 				"sessionId": "sess_123456",
 				"sessionIds": ["sess_123456", "sess_654321"] // if multiple sessions
+				"startDate": "2025-06-15T16:00:00.000Z", // if included in project
+				"endDate": "2025-06-22T18:00:00.000Z" // if included in project
 			}
 			// Additional fields based on project parameter
 		}

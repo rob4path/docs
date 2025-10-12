@@ -3,10 +3,7 @@ title: 'GET /orders/{uuid}'
 description: 'Get a specific order by its UUID.'
 ---
 
-import HumanizedFormatNote from '/snippets/humanized-format-note.mdx';
 import AuthenticationInfo from '/snippets/authentication-info.mdx';
-
-<HumanizedFormatNote />
 
 #### Authentication
 
@@ -46,36 +43,38 @@ GET /orders/order_123456?formatDates=true&includeGuestNames=true
 
 #### Response
 
-The response returns data in a **humanized format**, meaning all information is localized and ready to be displayed to end users in the requested language.
-
 ```json
 {
-	"uuid": "order_123456",
-	"orderDate": "01/15/2025",
-	"totalAmount": "$250.00",
-	"status": "Confirmed",
-	"guestNames": "John Doe, Jane Smith",
+	"uuid": "67890abc-def1-2345-6789-0123456789ab",
+	"orderDate": "2025-01-15T14:30:00.000Z",
+	"totalAmount": 250.0,
+	"status": "confirmed",
+	"guestNames": ["John Doe", "Jane Smith"],
 	"items": [
 		{
 			"name": "Room Upgrade",
 			"quantity": 1,
-			"price": "$150.00"
+			"price": 150.0,
+			"itemId": "item_abc123"
 		},
 		{
 			"name": "Spa Treatment",
 			"quantity": 2,
-			"price": "$50.00"
+			"price": 50.0,
+			"itemId": "item_def456"
 		}
 	],
 	"billingAddress": {
 		"street": "123 Main St",
 		"city": "New York",
 		"zip": "10001",
-		"country": "United States"
+		"country": "US"
 	},
-	"paymentMethod": "Credit Card",
-	"notes": "Special request for early check-in"
-	// Additional fields based on the order data
+	"paymentMethod": "credit_card",
+	"paymentStatus": "paid",
+	"notes": "Special request for early check-in",
+	"createdAt": "2025-01-15T10:00:00.000Z",
+	"updatedAt": "2025-01-15T14:30:00.000Z"
 }
 ```
 
