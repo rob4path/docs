@@ -14,12 +14,17 @@ description: 'Create an application that you can use for TeamM public API.'
 	Email of your application
 </ParamField>
 
+<ParamField path="centerApiPublicKey" type="string" required>
+	Public API key of the center
+</ParamField>
+
 Example:
 
 ```json
 {
 	"name": "Kitchen inventory app",
-	"email": "kitchen.inventory@mail.com"
+	"email": "kitchen.inventory@mail.com",
+	"centerApiPublicKey": "pk_abc123def456"
 }
 ```
 
