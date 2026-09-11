@@ -5,20 +5,20 @@
 		"dark": "/logo/dark.png",
 		"light": "/logo/light.png"
 	},
-	"favicon": "/favicon.svg",
+	"favicon": "/favicon.png",
 	"colors": {
-		"primary": "#13c7c7",
-		"light": "#07C983",
-		"dark": "#0D9373",
+		"primary": "#1f6b48",
+		"light": "#4f9c74",
+		"dark": "#124a31",
 		"anchors": {
-			"from": "#0D9373",
-			"to": "#07C983"
+			"from": "#124a31",
+			"to": "#1f6b48"
 		}
 	},
 	"topbarLinks": [
 		{
 			"name": "Support",
-			"url": "mailto:contact@teamm.com"
+			"url": "mailto:contact@teamm.work"
 		}
 	],
 	"topbarCtaButton": {
