@@ -1,93 +1,170 @@
 {
-	"$schema": "https://mintlify.com/schema.json",
-	"name": "TeamM API Documentation",
-	"logo": {
-		"dark": "/logo/dark.png",
-		"light": "/logo/light.png"
-	},
-	"favicon": "/favicon.png",
-	"colors": {
-		"primary": "#1f6b48",
-		"light": "#4f9c74",
-		"dark": "#124a31",
-		"anchors": {
-			"from": "#124a31",
-			"to": "#1f6b48"
-		}
-	},
-	"topbarLinks": [
-		{
-			"name": "Support",
-			"url": "mailto:contact@teamm.work"
-		}
-	],
-	"topbarCtaButton": {
-		"name": "Home",
-		"url": "https://teamm.help"
-	},
-	"tabs": [
-		{
-			"name": "Onboarding",
-			"url": "onboarding"
-		},
-		{
-			"name": "API Reference",
-			"url": "api-reference"
-		},
-		{
-			"name": "App Interface",
-			"url": "app-interface"
-		}
-	],
-	"anchors": [
-		{
-			"name": "Admin Panel",
-			"icon": "work",
-			"url": "https://teamm.work"
-		},
-		{
-			"name": "Landing Page",
-			"icon": "newspaper",
-			"url": "https://landing.teamm.work"
-		}
-	],
-	"navigation": [
-		{
-			"group": "Onboarding",
-			"pages": ["onboarding/fields-and-metas", "introduction"]
-		},
-		{
-			"group": "API Reference",
-			"pages": [
-				"api-reference/getting-started",
-				"api-reference/authentication",
-				"api-reference/guest-fields"
-			]
-		},
-		{
-			"group": "Endpoints",
-			"pages": [
-				"api-reference/endpoint/create-app",
-				"api-reference/endpoint/get-guests-list",
-				"api-reference/endpoint/get-guests",
-				"api-reference/endpoint/get-guests-meal-skipping",
-				"api-reference/endpoint/get-sessions",
-				"api-reference/endpoint/get-orders",
-				"api-reference/endpoint/get-order-by-uuid"
-			]
-		},
-		{
-			"group": "App Interface",
-			"pages": ["app-interface/overview", "app-interface/getting-started"]
-		},
-
-		{
-			"group": "Guest Management",
-			"pages": ["app-interface/guests/meal-preferences"]
-		}
-	],
-	"footerSocials": {
-		"github": "https://github.com/techandfriends",
-		"website": "https://teamm.io/"
-	}
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "TeamM API Documentation",
+  "logo": {
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#1f6b48",
+    "light": "#4f9c74",
+    "dark": "#124a31",
+    "anchors": {
+      "from": "#124a31",
+      "to": "#1f6b48"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:contact@teamm.work"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Home",
+    "url": "https://teamm.help"
+  },
+  "tabs": [
+    {
+      "name": "Onboarding",
+      "url": "onboarding"
+    },
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
+    {
+      "name": "App Interface",
+      "url": "app-interface"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Admin Panel",
+      "icon": "work",
+      "url": "https://teamm.work"
+    },
+    {
+      "name": "Landing Page",
+      "icon": "newspaper",
+      "url": "https://landing.teamm.work"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Onboarding",
+      "pages": [
+        "onboarding/fields-and-metas",
+        "introduction"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/getting-started",
+        "api-reference/authentication",
+        "api-reference/guest-fields"
+      ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        "api-reference/endpoint/create-app",
+        "api-reference/endpoint/get-guests-list",
+        "api-reference/endpoint/get-guests",
+        "api-reference/endpoint/get-guests-meal-skipping",
+        "api-reference/endpoint/get-sessions",
+        "api-reference/endpoint/get-orders",
+        "api-reference/endpoint/get-order-by-uuid"
+      ]
+    },
+    {
+      "group": "App Interface",
+      "pages": [
+        "app-interface/overview",
+        "app-interface/getting-started"
+      ]
+    },
+    {
+      "group": "Guest Management",
+      "pages": [
+        "app-interface/guests/meal-preferences"
+      ]
+    },
+    {
+      "group": "Program (planificare)",
+      "pages": [
+        {
+          "group": "Concepte",
+          "pages": [
+            "app-interface/program/introducere",
+            "app-interface/program/plan-terapeutic",
+            "app-interface/program/tipuri-de-proceduri-si-capacitate",
+            "app-interface/program/glosar"
+          ]
+        },
+        {
+          "group": "Configurare inițială",
+          "pages": [
+            "app-interface/program/configurare/proceduri",
+            "app-interface/program/configurare/protocoale-si-logici",
+            "app-interface/program/configurare/sabloane-program",
+            "app-interface/program/configurare/sabloane-terapeuti",
+            "app-interface/program/configurare/sabloane-sejur",
+            "app-interface/program/configurare/terapeuti-si-medici",
+            "app-interface/program/configurare/camere",
+            "app-interface/program/configurare/configurare-programare"
+          ]
+        },
+        {
+          "group": "Programul unui sejur, pas cu pas",
+          "pages": [
+            "app-interface/program/sejur/prezentare",
+            "app-interface/program/sejur/pasul-1-general",
+            "app-interface/program/sejur/pasul-2-terapeuti",
+            "app-interface/program/sejur/pasul-2b-alocare-automata",
+            "app-interface/program/sejur/pasul-3-repartizare",
+            "app-interface/program/sejur/pasul-4-oaspeti",
+            "app-interface/program/sejur/blocuri-si-ore-terapeuti"
+          ]
+        },
+        {
+          "group": "Ghiduri",
+          "pages": [
+            "app-interface/program/ghiduri/generare",
+            "app-interface/program/ghiduri/fixarea-vs-blocarea-orelor",
+            "app-interface/program/ghiduri/descarca-programul",
+            "app-interface/program/ghiduri/program-general-tabel",
+            "app-interface/program/ghiduri/instrumente-ajutatoare",
+            "app-interface/program/ghiduri/programul-meu",
+            "app-interface/program/ghiduri/notite",
+            "app-interface/program/ghiduri/program-clasic"
+          ]
+        },
+        {
+          "group": "Referință",
+          "pages": [
+            "app-interface/program/referinta/configurare-faze-cote-capacitate",
+            "app-interface/program/referinta/configurare-timp-si-zile",
+            "app-interface/program/referinta/configurare-terapeuti",
+            "app-interface/program/referinta/verificari",
+            "app-interface/program/referinta/versiuni-algoritm",
+            "app-interface/program/referinta/avertismente-si-mesaje"
+          ]
+        },
+        {
+          "group": "Depanare",
+          "pages": [
+            "app-interface/program/depanare/proceduri-neplasate",
+            "app-interface/program/depanare/intrebari-frecvente"
+          ]
+        }
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/techandfriends",
+    "website": "https://teamm.io/"
+  }
 }
