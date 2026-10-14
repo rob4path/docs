@@ -1,32 +1,10 @@
 ---
-title: "Generarea programului: opțiuni, versiuni, previzualizare, rezultat"
-description: "Ghid complet al generării orarului zilnic în TEAMM: dialogul „Opțiuni de generare”, versiunile algoritmului (V4 configurabil per centru), confirmarea de regenerare, zilele speciale, previzualizarea din Configurare, dialogul de rezultat cu atenționări, ștergerea programului și adăugarea manuală."
+title: "Generarea programului oaspeților"
 ---
 
 **Unde în aplicație:** „Program v2” → tab „Oaspeți” → butonul „Generează” (`/admin/schedule/manage-v2`). Previzualizarea: tab „Configurare” → „Previzualizare (simulare)”.
 
-## Întrebări la care răspunde pagina
-
-- Ce fac opțiunile „Proceduri”, „Oaspeți” și „Zile” din dialogul de generare?
-- Ce înseamnă versiunile V1–V4 și pe care o folosesc?
-- Ce se întâmplă cu programul existent când apăs „Generează” a doua oară?
-- Ce sunt bifele cu „proceduri de max. N min” din confirmare?
-- Cum citesc rezultatul: „Neprogramate”, „Peste norma terapeutului”, „Mutate în altă zi”?
-- Pot vedea ce ar ieși fără să scriu nimic în program?
-- Cum șterg doar programul generat automat, fără elementele blocate?
-
-## Pe scurt
-
-Generatorul dă ore, pentru ziua aleasă, tuturor procedurilor repartizate în acea zi. Îl pornești din „Generează”, alegi pentru ce proceduri, oaspeți și zile rulează, confirmi, iar la final primești un dialog de rezultat cu ce a fost programat și ce nu a încăput. Elementele blocate (🔒) și cele adăugate manual nu sunt atinse de regenerare. În Program v2 versiunea este fixată la V4.
-
-## Versiunile algoritmului
-
-| Versiune | Titlu în meniu | Observații |
-|---|---|---|
-| V4 | „V4 - Configurabil per centru” | Implicită. Folosește „Configurare programare” a centrului și este singura cu previzualizare. În Program v2 este singura disponibilă, meniul de versiuni fiind ascuns. |
-| V3 | „V3 - Algoritm optimizat” | Versiune anterioară, selectabilă din săgeata butonului în varianta clasică. |
-| V2 | „V2 - Algoritm îmbunătățit” | Versiune anterioară. |
-| V1 | „V1 - Algoritm vechi” | Versiune anterioară. |
+Generatorul dă ore, pentru ziua aleasă, tuturor procedurilor repartizate în acea zi. Îl pornești din „Generează”, alegi pentru ce proceduri, oaspeți și zile rulează, confirmi, iar la final primești un dialog de rezultat cu ce a fost programat și ce nu a încăput. Elementele blocate (🔒) și cele adăugate manual nu sunt atinse de regenerare. Program v2 folosește generatorul V4, care aplică regulile active ale centrului.
 
 <Info>
 Butonul „Generează” (scurtătură `G`) este ascuns când ziua nu are program general: fără program general nu se poate genera nimic.
@@ -39,7 +17,7 @@ Butonul „Generează” (scurtătură `G`) este ascuns când ziua nu are progra
     Descrierea dialogului: „Alege pentru ce proceduri, oaspeți și zile să se genereze programul.”
     - „Proceduri”: implicit „Toate procedurile”; „Lasă gol pentru a genera pentru toate procedurile.” („Golește” revine la toate).
     - „Oaspeți”: implicit „Toți oaspeții”; „Lasă gol pentru a genera pentru toți oaspeții.”
-    - „Zile”: grilă cu zilele sejurului; „Ziua curentă este mereu inclusă.”
+    - „Zile”: implicit se generează pentru ziua afișată; poți selecta exact zilele dorite, inclusiv numai ziua de mâine.
     Butoane: „Anulează” / „Generează” (Enter).
   </Step>
   <Step title="Confirmă">
@@ -77,7 +55,7 @@ Fiecare rând are o notă cu motivul, de exemplu „ora 09:00 era ocupată în z
 
 ## Previzualizare (simulare)
 
-În tab-ul „Configurare” → „Previzualizare (simulare)”: alegi „Sejur” și „Dată”, apoi „Previzualizare”. Rezultatul: „S-ar programa N programări, M neprogramate.” Nu se scrie nimic în program; funcționează doar cu V4 și pentru o singură zi.
+În tab-ul „Configurare” → „Previzualizare (simulare)”: alegi „Sejur” și „Dată”, apoi „Previzualizare”. Rezultatul: „S-ar programa N programări, M neprogramate.” Nu se scrie nimic în program; arată rezultatul pentru o singură zi.
 
 <Warning>
 Cotele, seed-urile și zilele permise se aplică la repartizare, nu la punerea orelor, așa că efectul lor nu se vede în previzualizare.

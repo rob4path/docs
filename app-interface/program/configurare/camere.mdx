@@ -1,20 +1,8 @@
 ---
 title: "Săli medicale și alocarea automată a camerelor"
-description: "Sălile medicale din TEAMM (camerele de proceduri și procedurile permise în fiecare) și regulile repartizării automate a camerelor: cameră oaspete → cameră implicită a procedurii → cameră terapeut → automat, cu dialogul „Repartizare camere”."
 ---
 
 **Unde în aplicație:** meniul „Medical” → „Camere” (`/admin/medical/rooms/medical`). Repartizarea automată: „Program v2” → tab „Repartizare” → dialogul de generare → „Pasul 3 · Repartizează camerele”; camera per programare se alege și manual în tab-ul „Terapeuți”.
-
-## Întrebări la care răspunde pagina
-
-- Cum spun aplicației ce proceduri se pot face într-o sală?
-- În ce ordine alege generatorul camera unei programări?
-- De ce o programare a rămas „Fără cameră”?
-- Ce se întâmplă cu camerele pe care le-am pus manual când rulez repartizarea camerelor?
-- Ce înseamnă „Cameră oaspete”, „Cameră implicită”, „Cameră terapeut” și „Automat” în raport?
-- Cum ascund coloana de cameră dacă centrul nu lucrează cu cameră per oaspete?
-
-## Pe scurt
 
 Sălile medicale sunt camerele disponibile pentru proceduri. Repartizarea automată a camerelor (Pasul 3) alege pentru fiecare programare o cameră compatibilă și liberă, urmând o ordine fixă de reguli, fără să suprarezerve o cameră ocupată și fără să atingă camerele setate manual (decât dacă ceri explicit).
 

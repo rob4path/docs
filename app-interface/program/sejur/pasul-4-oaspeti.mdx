@@ -1,20 +1,8 @@
 ---
 title: "Pasul 4 — Oaspeți: generează orarul zilei"
-description: "Cum generezi orele oaspeților pentru o zi în TEAMM: fixezi ore înainte de generare, rulezi generatorul, blochezi orele care trebuie să rămână, adaugi manual proceduri, rezolvi erorile marcate cu X, verifici suprapunerile și descarci programul."
 ---
 
 **Unde în aplicație:** „Program v2” → tab „Oaspeți” (`/admin/schedule/manage-v2`). Se lucrează pe **ziua** aleasă din calendar.
-
-## Întrebări la care răspunde pagina
-
-- Cum generez programul oaspeților pentru o zi?
-- De ce mi-a rescris generarea orele pe care le pusesem manual?
-- Cum îi spun generatorului la ce oră să pună o procedură?
-- Ce înseamnă „X” într-o celulă din tabelul oaspeților?
-- Cum adaug în program o procedură care nu vine din planul de terapie?
-- Pot regenera doar o parte din zi?
-
-## Pe scurt
 
 Al doilea generator: pentru ziua aleasă, dă ore tuturor procedurilor repartizate în acea zi. Respectă capacitatea fiecărei proceduri, ferestrele de timp, programul și orele blocate ale terapeuților, ordinea cerută de „Reguli și logici” și restricțiile de gen. Nimic nu este pus cu forța peste o regulă: ce nu poate fi plasat apare la „Neprogramate”, cu motivul.
 
@@ -28,7 +16,7 @@ Ordinea pașilor din bară este ordinea de lucru a zilei:
     </Note>
   </Step>
   <Step title="Generează">
-    Butonul „Generează” deschide opțiunile de generare: **Proceduri** (gol = toate), **Oaspeți** (gol = toți), **Zile** (ziua curentă este mereu inclusă). Din săgeata butonului alegi versiunea algoritmului: „V4 - Configurabil per centru” (implicit), V3, V2, V1. Dacă ziua are deja program, aplicația avertizează: elementele blocate (🔒) se păstrează, restul programului generat automat va fi înlocuit.
+    Butonul „Generează” deschide opțiunile de generare: **Proceduri** (gol = toate), **Oaspeți** (gol = toți), **Zile** (implicit ziua afișată; poți alege și alte zile). Program v2 folosește generatorul V4. Dacă ziua are deja program, aplicația avertizează: elementele blocate (🔒) se păstrează, restul programului generat automat va fi înlocuit.
     La final vezi rezultatul: „Programul a fost generat cu succes” sau „N proceduri nu au putut fi programate”, cu grupele de avertismente. Detalii în [Generarea programului](/app-interface/program/ghiduri/generare).
     <Info>
     Numărul afișat pe pas este totalul programărilor din ziua respectivă, indiferent de unde au venit (generare, repartizare sau adăugare manuală). Bifezi pasul tu, când consideri generarea făcută.

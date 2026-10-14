@@ -1,37 +1,24 @@
 ---
 title: "Program v2: pașii și bara „Verificări”"
-description: "Cum este organizată pagina Program v2 din TEAMM: cei patru pași ai unui sejur, tab-ul Configurare, bara de verificări cu pași automați și manuali, dependențe, pași opționali și bifarea pe zi sau pe sejur."
 ---
 
-**Unde în aplicație:** meniul „Program” → „Program v2 ⚡️” (`/admin/schedule/manage-v2`). Varianta clasică, „Creează programul” (`/admin/schedule/manage`), are aceleași tab-uri fără bara de verificări.
-
-## Întrebări la care răspunde pagina
-
-- Care sunt pașii de urmat ca să fac programul unui sejur?
-- Ce înseamnă un pas „blocat” în bara de verificări?
-- De ce unii pași se bifează pe zi și alții pe tot sejurul?
-- Ce este un pas opțional și de ce nu apare în numărătoarea „de făcut”?
-- Cum ascund sau redenumesc un pas din bara de verificări?
-
-## Pe scurt
+**Unde în aplicație:** meniul „Program” → „Program v2 ⚡️” (`/admin/schedule/manage-v2`).
 
 Pagina „Program v2” te conduce prin construirea programului unui sejur în patru pași, plus un tab de configurare. Sus alegi **sejurul** și **ziua** din calendar. Bara „Verificări” (jos sau lateral, după preferință) arată pentru pasul curent ce este deja în regulă, ce lipsește și ce ai de bifat manual.
 
 ## Pașii
 
-| Pas | Subtitlu în aplicație | Ce faci acolo |
-|---|---|---|
-| General | Procedurile zilei | Programul general al zilei, din șabloane; duplicare pe alte zile |
-| Terapeuți | Program pe terapeut | Disponibilitate, șabloane terapeuți, alocare, camere, export terapeuți |
-| Repartizare | Terapeut, oră, cameră | Distribuirea procedurilor individuale pe zilele sejurului |
-| Oaspeți | Generează orarul | Orele zilei, fixare și blocare ore, erori, export oaspeți |
-| Configurare | O singură dată | Politica centrului (nu se reface la fiecare sejur) |
+| Pas | Ce faci |
+|---|---|
+| General | Pregătești programul general al zilei |
+| Terapeuți | Stabilești cine lucrează și când |
+| Repartizare | Distribui procedurile oaspeților pe zilele sejurului |
+| Oaspeți | Generezi și ajustezi orele zilei |
+| Configurare | Setezi regulile centrului |
 
 Fiecare pas are pagina lui: [Pasul 1 — General](/app-interface/program/sejur/pasul-1-general), [Pasul 2 — Terapeuți](/app-interface/program/sejur/pasul-2-terapeuti), [Pasul 3 — Repartizare](/app-interface/program/sejur/pasul-3-repartizare), [Pasul 4 — Oaspeți](/app-interface/program/sejur/pasul-4-oaspeti).
 
-<Note>
-Pasul „Repartizare” acoperă tot sejurul, nu o singură zi. Calendarul este dezactivat pe acest pas; alegi ziua din celelalte.
-</Note>
+Repartizarea acoperă tot sejurul. Poți alege o zi din calendar pentru a o inspecta, fără să limitezi repartizarea la acea zi.
 
 ## Bara „Verificări”
 
