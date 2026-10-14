@@ -14,8 +14,7 @@ Paginile din acest folder sunt incluse în navigația din `mint.json`. Când ada
 - Prima linie: `**Unde:** … (/admin/...)`.
 - Etichetele din interfață se citează exact, cu ghilimele românești „…".
 - Fără capturi de ecran: se învechesc, iar asistenții AI citesc textul.
-- Sursele textelor: fișierele `*.entity-info.ts`, `scheduling-config.tooltips.ts`, `schedule-verify.catalog.ts` / `.text.ts`
-  și `schedule-flow.config.ts` din codul aplicației. Când se schimbă un text acolo, actualizează pagina corespunzătoare.
+- Sursele textelor: fișierele `*.entity-info.ts`, `scheduling-config.tooltips.ts` și `schedule-verify.catalog.ts` / `.text.ts` din codul aplicației. Când se schimbă un text acolo, actualizează pagina corespunzătoare.
 
 ## Test de regăsire
 
