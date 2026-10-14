@@ -8,7 +8,7 @@ Generatorul nu pune niciodată o procedură cu forța peste o regulă. Când nu 
 
 <Steps>
   <Step title="Procedura este inclusă în program?">
-    Doar procedurile marcate „inclusă în program” intră în generare. O procedură nebifată poate fi prescrisă la consultație, dar nu primește niciodată ore. Verifică în „Program” → „Proceduri” (`/admin/schedule/procedures`).
+    Doar procedurile marcate „inclusă în program” intră în generare. O procedură nebifată poate fi prescrisă la consultație, dar nu primește niciodată ore. Verifică în „Program” → „Proceduri” ([`/admin/schedule/procedures`](https://teamm.work/admin/schedule/procedures)).
   </Step>
   <Step title="Ziua are program general?">
     Fără program general pentru zi, tab-ul Oaspeți afișează „Creează mai întâi programul general în pasul «Program general»”. Pentru procedurile **colective**, orele vin exclusiv din sloturile programului general: dacă slotul lipsește în acea zi, procedura nu poate fi programată. Vezi [Pasul 1](/app-interface/program/sejur/pasul-1-general).
@@ -42,7 +42,7 @@ Generatorul nu pune niciodată o procedură cu forța peste o regulă. Când nu 
     „Max / zi” este limită strictă: a doua procedură din aceeași categorie în aceeași zi nu se pune. „Min / sejur” ridică ținta oaspetelui; dacă nu se atinge, diferența apare la „Neprogramate”.
   </Step>
   <Step title="Regulile și logicile?">
-    „Necesită” / „evită”, „înainte” / „după” / „în aceeași zi”, pauze obligatorii. Prea multe reguli stricte pot face o procedură neplasabilă: generatorul o raportează în loc să încalce regula. Verifică `/admin/medical/procedure-logics`.
+    „Necesită” / „evită”, „înainte” / „după” / „în aceeași zi”, pauze obligatorii. Prea multe reguli stricte pot face o procedură neplasabilă: generatorul o raportează în loc să încalce regula. Verifică [`/admin/medical/procedure-logics`](https://teamm.work/admin/medical/procedure-logics).
   </Step>
   <Step title="Ora fixată sau ora individuală este ocupată?">
     Cu politica „strict”, generatorul nu acceptă altă oră decât cea preferată. Mesajul „PREFERRED_HOUR_CONTENTION” / „Mutate în altă zi” înseamnă că ora era ocupată și procedura a fost pusă în altă zi (nu se pierde nimic). Schimbă politica în „sameDayFallback” sau eliberează ora.
