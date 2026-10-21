@@ -31,17 +31,24 @@ Tab-ul „Terapeuți” arată o matrice terapeuți × ore pentru ziua aleasă. 
     „Adaugă șabloane” aduce în tabel șabloanele alese (T1, F2…) ca terapeuți fictivi, filtrabile după etichete. Un rând de șablon are program pe ore: protocoale sau proceduri fixe și ore libere „P” pentru oaspeți.
   </Step>
   <Step title="Modifică șabloanele doar pentru acest sejur (opțional)">
-    Pasul „Modificări în șabloanele terapeutilor” deschide editorul „Editează șabloanele pentru sejur”: rânduri = șabloane, coloane = ore. Modificările se salvează cu „Salvează pentru sejur” și nu ating șabloanele centrului. Un rând „Program modificat pentru acest sejur” poate fi readus la șablon.
+    Programul unui rând de șablon se editează **direct în tabel**, cu terapeutul ales și pacienții din orele „P” la vedere: click pe o oră deschide editorul cu „Activitate” / „P” / „Bloc” (protocoale și proceduri pentru o activitate, text și „Ore libere (compensare)” pentru un bloc); din hover pui direct „Oră de oaspeți (P)”, deschizi editorul sau „Golește ora”. Modificările se salvează singure, doar pentru acest sejur (rândul primește semnul „Program modificat pentru acest sejur”), și pot fi anulate din istoricul modificărilor. Orele din plan aflate în afara intervalului de ore afișat apar ca „+N” lângă nume și se editează din „Editează șabloanele”.
+
+    **Pe ce zile se aplică o modificare.** Eticheta de sub numele rândului spune pe ce program cade editarea: „toate zilele” (programul comun al sejurului), numele grupei de zile („Zile pline”) când rândul are program separat pe grupe, sau „zi N” pentru un program fixat pe o zi. La prima modificare pe programul comun primești un avertisment; din etichetă alegi „Separă pe grupe — modificările de azi doar pentru „Grupa X”” ca modificările din ziua afișată să rămână doar în grupa ei (celelalte grupe păstrează programul de dinainte). Tot de acolo: „Readu la un singur program (toate zilele)” și „Revino la șablon (elimină modificările din sejur)”.
+
+    Pentru lucru în bloc — reordonare, rânduri noi, ore în afara intervalului afișat — „Editează șabloanele” (meniul „Alte acțiuni”) deschide editorul „Editează șabloanele pentru sejur”: rânduri = șabloane, coloane = ore; se salvează cu „Salvează pentru sejur”. „+” de pe rândul unui șablon („Adaugă un rând sub acesta”) sau „Adaugă rând (șablon)” de sub tabel deschide alegerea șabloanelor („Adaugă șabloane în tabel”, cu butonul „Șablon nou…” pentru a crea unul pe loc); ordinea rândurilor se schimbă trăgând de mânerul din fața numelui sau cu „Mută rândul în sus” / „Mută rândul în jos” și se păstrează în tabelul cu terapeuți.
   </Step>
+
   <Step title="Repartizează terapeuții la șabloane">
     Pasul „Repartizează terapeuții la șabloane”: în prima coloană a tabelului alegi câte un terapeut real pentru fiecare șablon (T1 → Maria). Genul șablonului restrânge lista.
   </Step>
   <Step title="Adaugă pacienții în șabloane">
     Pasul „Adaugă pacienții în șabloane”: în locurile marcate „P” adaugi pacienții care fac proceduri individuale la acel terapeut. Dacă un pacient trebuie neapărat să rămână la terapeutul alocat, apasă lacătul de lângă nume („Fixează oaspetele la acest terapeut (nu-l muta)”); generatorul de alocare nu îl va muta.
   </Step>
-  <Step title="Aplică șabloanele">
-    Pasul „Aplică șabloanele” atribuie toate șabloanele care au deja un terapeut ales: terapeutul este atașat sloturilor din programul general care se potrivesc cu orele lui.
-    <Warning>
+  <Step title="Aplică șabloanele — zi de zi">
+    Șabloanele se aplică **pentru ziua afișată**, nu pentru tot sejurul — la fel cum, pe hârtie, programul zilei următoare se face duplicând șablonul grupei ei și ajustându-l. „Aplică șabloanele (16.09)” atribuie, pentru acea zi, toate șabloanele care au deja un terapeut ales; „✓” de pe un rând aplică doar acel șablon. Rândurile rămân în tabel pentru restul sejurului, cu terapeutul și pacienții lor; o modificare de program ajunge în fiecare zi aplicată după ea.
+
+    Lângă numele rândului vezi starea zilei afișate: „aplicat” (verde), „neaplicat” (gri) sau „de reaplicat” (roșu — programul sau terapeutul s-a schimbat de la ultima aplicare a acestei zile). Numărul de lângă butonul „Aplică șabloanele” spune câte rânduri mai au ceva de aplicat pentru ziua afișată. Dacă verificarea nu semnalează nimic, aplicarea se face direct; altfel se deschide panoul cu diferențele, de unde poți deselecta modificări.
+
     Atribuirea **nu creează sloturi**. Dacă o oră din șablon nu are slot corespunzător în ziua respectivă, primești o avertizare; slotul se creează din pasul „General”. Orele „P” nu se scriu nicăieri: oaspeții se pun manual sau cu generatorul de alocare.
     </Warning>
     Atribuirea **adaugă, nu înlocuiește**: terapeutul se pune peste cine este deja pe slot. La o nouă aplicare pentru același șablon, doar terapeutul pus anterior de acel șablon este înlocuit; cei adăugați manual rămân.

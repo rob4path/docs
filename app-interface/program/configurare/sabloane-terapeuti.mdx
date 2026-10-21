@@ -66,7 +66,7 @@ Programul se definește pe zilele sejurului, nu pe zilele săptămânii — prim
     Un rând „toate zilele” („Același program în toate zilele”) are același program în fiecare zi; „Separă” („Separă rândul”) îi copiază programul comun într-un plan propriu al grupei, ca să poată diferi — rândul devine „pe grupe” („Program separat pentru fiecare grupă de zile”). „Readu la comun” („Readu rândul la comun”) renunță la planul separat.
   </Step>
   <Step title="Completează celulele">
-    Click pe o celulă deschide editorul cu „Activitate” / „P” / „Bloc”; din hover poți pune direct „Oră de oaspeți (P)”, „Copiază în altă celulă” („Lipește celula”), „Schimbă cu altă celulă” („Schimbă celulele”) sau „Golește ora”. Coloane de oră se adaugă din „Adaugă coloană oră:” și se pot șterge cu „Șterge coloana”. „Adaugă șablon” creează un rând nou.
+    Click pe o celulă deschide editorul cu „Activitate” / „P” / „Bloc”; din hover poți pune direct „Oră de oaspeți (P)”, „Copiază în altă celulă” („Lipește celula”), „Schimbă cu altă celulă” („Schimbă celulele”) sau „Golește ora”. Coloane de oră se adaugă din „Adaugă coloană oră:” și se pot șterge cu „Șterge coloana”. „Adaugă șablon” creează un rând nou la sfârșit; „+” de pe un rând („Adaugă un rând sub acesta”) creează șablonul nou chiar sub acel rând. Rândurile se reordonează trăgând de mânerul din fața numelui sau cu „Mută rândul în sus” / „Mută rândul în jos”; ordinea se salvează odată cu tabelul și este ordinea șabloanelor din listă și din alegerea de pe sejur.
   </Step>
   <Step title="Salvează">
     „Salvează” scrie toate șabloanele; „Modificări nesalvate” te avertizează la ieșire. În varianta din sejur („Editează șabloanele pentru sejur”), „Salvează pentru sejur” salvează o copie doar pentru acel sejur: „Modificările se salvează doar pentru acest sejur, ca o copie a șabloanelor schimbate. Celelalte șabloane rămân neatinse.”
@@ -83,12 +83,12 @@ Motivul regulii: orele P sunt orele în care generatorul de alocare pune oaspeț
 
 ## Ce se întâmplă la aplicare în sejur
 
-Aplicarea se face din tab-ul „Terapeuți” al sejurului (vezi [Pasul 2 — Terapeuți](/app-interface/program/sejur/pasul-2-terapeuti)):
+Aplicarea se face din tab-ul „Terapeuți” al sejurului (vezi [Pasul 2 — Terapeuți](/app-interface/program/sejur/pasul-2-terapeuti)), **câte o zi odată** — ziua afișată în tabel. Rândurile de șablon rămân în sejur după aplicare, iar fiecare rând ține minte ce zile a aplicat („aplicat” / „neaplicat” / „de reaplicat”):
 
 - **Nu creează sloturi.** Atribuirea doar atașează terapeutul la sloturile care există deja în program. Dacă o oră din șablon nu are slot corespunzător în ziua respectivă, primești o avertizare — slotul trebuie creat din „Program general”.
 - **Orele P rămân libere.** Orele marcate P nu se scriu nicăieri: repartizarea oaspeților pe ele rămâne manuală sau se face cu generatorul de alocare.
 - **Blocurile devin blocaje.** Fiecare celulă „Bloc” creează un blocaj real al terapeutului atribuit, în acea oră, cu textul din celulă; blocurile „Ore libere (compensare)” sunt marcate ca ore libere. La o reaplicare, blocul creat anterior de același șablon este actualizat, nu dublat.
-- **Adaugă, nu înlocuiește.** Atribuirea adaugă terapeutul peste cine este deja pe slot. La o nouă atribuire pentru același șablon, doar terapeutul pus anterior de acel șablon este înlocuit — cei adăugați manual rămân. O reaplicare fără schimbări nu modifică nimic.
+- **Adaugă, nu înlocuiește.** Atribuirea adaugă terapeutul peste cine este deja pe slot. La o nouă atribuire pentru același șablon, doar terapeutul pus anterior de acel șablon este înlocuit — cei adăugați manual rămân. O reaplicare fără schimbări nu modifică nimic. Terapeutul „pus anterior” este reținut pe sejur, nu pe zi: dacă schimbi terapeutul unui șablon la mijlocul sejurului și reaplici apoi o zi de dinainte, terapeutul vechi nu este scos de pe acea zi — scoate-l manual.
 - **Șablon vs. generator.** Sloturile completate din șabloane sunt tratate de generatorul de alocare drept modificări manuale: nu sunt suprascrise la o nouă rulare decât dacă alegi „Suprascrie și modificările manuale”.
 
 ## Exemple

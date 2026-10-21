@@ -20,7 +20,7 @@ Bara „Verificări” afișează, pentru tab-ul curent al paginii Program v2, o
 
 Legendă pentru tabelele de mai jos:
 
-- **Bifare**: „O dată pe sejur” = o bifă acoperă tot sejurul; „Pe fiecare zi” = se bifează separat pentru fiecare zi. Centrul poate schimba modul, inclusiv la „Fără bifare”.
+- **Bifare**: „O dată pe sejur” = o bifă acoperă tot sejurul; „Pe fiecare zi” = se bifează separat pentru fiecare zi. Centrul poate schimba modul, inclusiv la „În anumite zile” (pasul apare doar în zilele alese ale sejurului, ex. ziua 2 și ziua 8, și se bifează separat pentru fiecare; în restul zilelor nu apare și nu intră în numărătoare) sau la „Fără bifare”.
 - **Opțional**: pasul se afișează și se poate bifa, dar nu intră în numărătoarea „N de făcut”.
 - **Ascuns implicit**: verificarea rulează (datele și blocările ei rămân active), dar cardul nu apare până când centrul nu adaugă pasul în lista proprie.
 - **Praguri**: eticheta opțiunii = valoarea implicită (minim–maxim). Valoarea implicită reproduce comportamentul de dinainte ca pragul să fie configurabil.
@@ -122,10 +122,10 @@ Din „Configurare programare” → „Pași verificare (bara laterală din Pro
 | Ordinea | Ordinea în bară. Trage pașii pentru a-i rearanja. |
 | „Depinde de” | Pașii care trebuie finalizați înainte ca acesta să devină apăsabil. Gol = pasul nu este blocat niciodată. Dacă nu modifici nimic, se folosesc dependențele implicite ale verificării. Pașii dezactivați nu blochează niciodată, iar pașii proprii (text liber) nu pot fi aleși aici. |
 | „Opțional” | Pașii opționali („nice to have”) se afișează normal și pot fi bifați, dar nu intră în numărătoarea „N de făcut” din bară. Dacă nu modifici nimic, se folosește valoarea implicită a verificării. |
-| „Bifare” | „O dată pe sejur” = o bifă acoperă tot sejurul; „Pe fiecare zi” = se bifează separat pentru fiecare zi; „Fără bifare” = pasul nu se poate bifa. Bifa este comună întregii echipe. |
+| „Bifare” | „O dată pe sejur” = o bifă acoperă tot sejurul; „Pe fiecare zi” = se bifează separat pentru fiecare zi; „În anumite zile” = alegi zilele din sejur (ex. ziua 2 și ziua 8) în care apare pasul — se bifează separat pentru fiecare, iar în celelalte zile nu apare și nu intră în numărătoare; „Fără bifare” = pasul nu se poate bifa. Bifa este comună întregii echipe. |
 | „Praguri” | Opțiunile numerice ale verificării (vezi coloanele „Praguri” de mai sus). Valorile în afara intervalului sunt refuzate la salvare. |
 
-În listă, fiecare pas poartă etichete: „Pas propriu”, „Bifare pe zi”, „Fără bifare”, „Opțional”, „Inactiv”.
+În listă, fiecare pas poartă etichete: „Pas propriu”, „Bifare pe zi”, „Ziua N” / „Zilele N, M” (pentru „În anumite zile”), „Fără bifare”, „Opțional”, „Inactiv”.
 
 Exemple:
 

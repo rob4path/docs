@@ -1,6 +1,6 @@
 ---
 title: "Configurare: ferestre de timp, zile din săptămână, zile speciale, reguli demografice"
-description: "Referință pentru secțiunile „Intervale orare”, „Zile permise”, „Zile speciale (proceduri scurtate)” și „Reguli demografice” din „Configurare programare” în TEAMM: formatul HHmm, fusul orar al centrului, numărarea zilelor și bifele de la generare."
+description: "Referință pentru secțiunile „Intervale orare”, „Zile permise”, „Zile speciale (proceduri scurtate, ore decalate)” și „Reguli demografice” din „Configurare programare” în TEAMM: formatul HHmm, fusul orar al centrului, numărarea zilelor, bifele de la generare și orele afișate decalate."
 ---
 
 **Unde în aplicație:** meniul „Program” → „Configurare programare” (`/admin/schedule/config`), sau tab-ul „Configurare” din „Program v2 ⚡️” (`/admin/schedule/manage-v2`).
@@ -11,12 +11,13 @@ description: "Referință pentru secțiunile „Intervale orare”, „Zile perm
 - Cum interzic o procedură între 12:00 și 13:00 (pauza de curățenie)?
 - Cum restricționez o procedură doar la luni, miercuri și vineri?
 - Cum scurtez procedurile individuale în ultima zi de sejur sau într-o vineri scurtă?
+- Cum fac ca vineri orele de după-amiază să apară cu 30 de minute mai devreme (15:00 → 14:30) în tabele și bilețele?
 - De ce la generare apare o bifă cu „Vineri scurtă (06.03): proceduri de max. 45 min”?
 - Cum semnalez că oaspeții peste 65 de ani ar trebui să aibă EKG în plan?
 
 ## Pe scurt
 
-Secțiunile de pe această pagină decid **când** poate fi programată o procedură: la ce oră din zi („Intervale orare”), în ce zile ale săptămânii („Zile permise”) și cât durează în anumite zile ale sejurului („Zile speciale”). „Reguli demografice” nu programează nimic: doar semnalează, în simulare, oaspeții cărora le lipsește o procedură din plan. Toate orele se scriu în format `HHmm` (24 h, fără două puncte) și sunt interpretate în fusul orar al centrului.
+Secțiunile de pe această pagină decid **când** poate fi programată o procedură: la ce oră din zi („Intervale orare”), în ce zile ale săptămânii („Zile permise”), cât durează în anumite zile ale sejurului și cum se afișează orele în acele zile („Zile speciale”). „Reguli demografice” nu programează nimic: doar semnalează, în simulare, oaspeții cărora le lipsește o procedură din plan. Toate orele se scriu în format `HHmm` (24 h, fără două puncte) și sunt interpretate în fusul orar al centrului.
 
 <Warning>
 Cele două numărători de zile sunt diferite: la „Zile speciale” câmpul „A câta zi din sejur” se numără **de la 1** (1 = prima zi a sejurului), iar la „Semințe implicite” câmpul „Ziua (index)” se numără **de la 0** (0 = prima zi). Detalii mai jos.
@@ -66,22 +67,36 @@ Exemple:
 „Zile permise” se aplică la repartizarea pe zile (pasul Repartizare). Dacă zilele permise sunt puține și frecvența din plan este mare, repartizarea nu are unde să pună toate ședințele — vezi [De ce nu a fost plasată o procedură](/app-interface/program/depanare/proceduri-neplasate).
 </Tip>
 
-## Zile speciale (proceduri scurtate)
+## Zile speciale (proceduri scurtate, ore decalate)
 
-Zile speciale din sejur (ex. ultima zi sau o vineri scurtă) în care procedurile de tipurile alese durează mai puțin decât de obicei. Durata efectivă este minimul dintre durata procedurii și durata zilei — regula doar scurtează, nu prelungește. Tipurile neselectate nu sunt afectate. Ziua se numără de la începutul sejurului: ziua 1 = prima zi.
+Zile speciale din sejur (ex. ultima zi sau o vineri scurtă). O zi specială poate face două lucruri, separat sau împreună: **scurtează** procedurile de tipurile alese (durata efectivă este minimul dintre durata procedurii și durata zilei — regula doar scurtează, nu prelungește; tipurile neselectate nu sunt afectate) și/sau **decalează orele afișate** (vezi „Ore decalate” mai jos). Ziua se numără de la începutul sejurului: ziua 1 = prima zi. O regulă trebuie să aibă cel puțin una dintre cele două: durată sau decalaj.
 
 | Câmp | Ce face | Exemplu |
 |---|---|---|
 | „A câta zi din sejur” | A câta zi din sejur (1 = prima zi a sejurului, după fusul orar al centrului). | `12` (ultima joi) |
-| „Durată (minute)” | Durata maximă (minute) a procedurilor în acea zi, pentru tipurile alese. Între 5 și 240. | `40` |
+| „Durată (minute, opțional)” | Durata maximă (minute) a procedurilor în acea zi, pentru tipurile alese. Între 5 și 240. Gol = ziua nu scurtează nimic (regulă doar cu ore decalate). | `40` |
 | „Tipuri de proceduri” | Tipurile de proceduri scurtate în acea zi (ex. Individuală; sau Individuală + Colectivă pentru a scurta și Bazin). Restul tipurilor păstrează durata lor normală. Opțiuni: „Individuală”, „Colectivă”, „Mixtă”, „Consultație”. | Individuală |
 | „Etichetă” | Etichetă afișată la generare (ex. „Vineri scurtă”). | `Vineri scurtă` |
-| „Opțională (se confirmă la generare)” | Activă doar la cerere: la generare apare o bifă (debifată implicit) și personalul decide per rulare. Debifat = regula se aplică mereu. | activ pentru vinerea scurtă |
+| „Opțională (se confirmă la generare)” | Activă doar la cerere: la generare apare o bifă (debifată implicit) și personalul decide per rulare. Debifat = regula se aplică mereu. Privește doar scurtarea duratei; decalajul orelor se afișează întotdeauna. | activ pentru vinerea scurtă |
+| „Ore decalate de la (HHmm)” | Prima oră de la care orele afișate se decalează (inclusiv). Orele de dinainte rămân neschimbate. Gol = fără decalaj. | `1500` |
+| „Cu (minute) mai devreme” | Cu câte minute mai devreme se afișează orele de la ora de mai sus încolo. Între 5 și 180. | `30` |
 
 Exemple:
 
 - Ziua 12 (ultima joi), proceduri individuale de 40 min — se aplică mereu la generare.
 - Ziua 6 (vineri), individuale + colective (ex. Bazin) de 45 min, opțională — la generare apare o bifă și personalul decide dacă se aplică.
+
+### Ore decalate (doar afișare)
+
+Vinerea, în multe centre, după-amiaza începe cu 30 de minute mai devreme: ce era la 15:00 se face la 14:30, 16:00 devine 15:30. Pe hârtie asta se rezolva prin înlocuirea orelor în foaia de calcul după ce programul era gata. În TEAMM, aceeași înlocuire este regula „Ore decalate” a zilei speciale:
+
+- **Programul se construiește pe grila normală de ore.** Sloturile din „Program general”, șabloanele de terapeuți, blocajele, orele fixate, generatoarele și verificările lucrează în continuare cu 15:00, 16:00… Nimic nu se mută în date.
+- **Se schimbă doar ce se afișează și se exportă** pentru acea zi: antetele și celulele din tabelul „Oaspeți”, etichetele coloanelor din tabelul „Terapeuți” și „Săli”, exporturile Individual, Colectiv, Terapeuți și Pe ore (docx, pdf, csv), „Programul meu” al terapeutului și programul din aplicația oaspetelui. O oră nominală de 15:00 apare 14:30; 14:59 rămâne 14:59.
+- Începutul și sfârșitul unei programări se decalează independent: un bloc 14:00–15:00 apare 14:00–14:30, exact ca pauza de prânz scurtată.
+- În tabelele din „Program v2”, în acea zi apare cipul „Ore afișate decalate de la 15:00 (−30 min)”. **La editare folosești orele nominale**: editorul din celulă, cronologia, „Fixează ore la proceduri” și dialogul de adăugare manuală arată și primesc 15:00, nu 14:30.
+- Decalajul nu are bifă la generare: dacă regula există, se afișează în fiecare sejur în ziua respectivă. Pentru un sejur fără vineri scurtă, scoate temporar decalajul din regulă.
+
+Exemplu: ziua 6 (vineri), „Ore decalate de la” `1500`, „Cu” `30` → 15:00 → 14:30, 15:30 → 15:00, 16:00 → 15:30, 16:30 → 16:00. Aceeași regulă poate avea și „Durată (minute)” 45, opțională, pentru vinerile în care procedurile se și scurtează.
 
 ### Cum se numără ziua
 
