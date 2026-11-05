@@ -1,74 +1,17 @@
 ---
-title: "Pasul 4 — Oaspeți: generează orarul zilei"
+title: "Pasul 4 — Oaspeți"
 ---
 
-**Unde:** „Program v2” → tab „Oaspeți” ([`/admin/schedule/manage-v2`](https://teamm.work/admin/schedule/manage-v2)). Se lucrează pe **ziua** aleasă din calendar.
+**Unde:** [„Program v2” → „Oaspeți”](https://teamm.work/admin/schedule/manage-v2).
 
-Al doilea generator: pentru ziua aleasă, dă ore tuturor procedurilor repartizate în acea zi. Respectă capacitatea fiecărei proceduri, ferestrele de timp, programul și orele blocate ale terapeuților, ordinea cerută de „Reguli și logici” și restricțiile de gen. Nimic nu este pus cu forța peste o regulă: ce nu poate fi plasat apare la „Neprogramate”, cu motivul.
+Generatorul dă ore procedurilor repartizate în ziua aleasă. Respectă capacitatea, programul terapeuților, intervalele orare, logica dintre proceduri și restricțiile de gen. Ce nu încape apare la „Neprogramate”, cu motivul.
 
-Ordinea pașilor din bară este ordinea de lucru a zilei:
+## Înainte și după generare
 
-<Steps>
-  <Step title="Fixează orele anumitor proceduri (opțional) — ÎNAINTE de generare">
-    Îi spui generatorului la ce oră să pună o anumită procedură, iar el o plasează acolo. Click pe pas deschide „Fixează ore la proceduri”: alegi tipul de procedură, apoi procedura, iar lista se restrânge la oaspeții care o au. Poți stabili ora pentru mai mulți oaspeți deodată; o oră poate fi „Oră fixată” sau „Flexibil”. Același panou se deschide și din iconița de lacăt din bara tabelului. Fixarea se păstrează pe oaspete pe tot sejurul.
-    <Note>
-    Pasul este opțional: dacă nu fixezi nimic, generatorul alege singur orele. Nu confunda cu „Blochează orele care vrei să rămână așa”, care protejează, după generare, orele deja plasate.
-    </Note>
-  </Step>
-  <Step title="Generează">
-    Butonul „Generează” deschide opțiunile de generare: **Proceduri** (gol = toate), **Oaspeți** (gol = toți), **Zile** (implicit ziua afișată; poți alege și alte zile). Program v2 folosește generatorul V4. Dacă ziua are deja program, aplicația avertizează: elementele blocate (🔒) se păstrează, restul programului generat automat va fi înlocuit.
-    La final vezi rezultatul: „Programul a fost generat cu succes” sau „N proceduri nu au putut fi programate”, cu grupele de avertismente. Detalii în [Generarea programului](/app-interface/program/ghiduri/generare).
-    <Info>
-    Numărul afișat pe pas este totalul programărilor din ziua respectivă, indiferent de unde au venit (generare, repartizare sau adăugare manuală). Bifezi pasul tu, când consideri generarea făcută.
-    </Info>
-  </Step>
-  <Step title="Blochează orele care vrei să rămână așa — DUPĂ generare">
-    Orele blocate nu mai sunt rescrise de generările următoare, așa că poți regenera restul zilei fără să pierzi ce ai stabilit deja. Blochezi direct în tabelul oaspeților: lacătul din celulă pentru o singură oră, sau lacătul din capul coloanei („Blochează coloana”) pentru toată procedura. Tot de acolo se și deblochează. Pasul arată „N ore blocate în această zi”.
-  </Step>
-  <Step title="Adaugă manual anumite proceduri în program (opțional)">
-    Unele proceduri se stabilesc pe loc și nu vin din planul de terapie. Din bara „Instrumente” → „Adaugă manual elemente în programul zilei”: alegi oaspeții, procedurile (opțional doar cele din programul general al zilei), modul de stabilire a orei (o oră fixă pentru toți, ora deja setată a fiecărui oaspete, sau generată automat în primul interval liber), durata (poate include o pauză la final) și, la consultații, medicul. Intrările adăugate astfel se așază peste programul generat și rămân acolo.
-  </Step>
-  <Step title="Rezolvă manual eventualele erori">
-    Procedurile pe care generatorul nu a reușit să le plaseze rămân marcate cu „X” în tabelul oaspeților, iar rândurile afectate sunt evidențiate. Scrie ora direct în celulă pentru a rezolva eroarea. Pasul arată „N programări cu eroare de rezolvat”.
-  </Step>
-  <Step title="Descarcă">
-    Deschide dialogul de export cu tipul „Oaspeți” preselectat. Vezi [Descarcă programul](/app-interface/program/ghiduri/descarca-programul).
-  </Step>
-</Steps>
+- **Fixează ora înainte:** dacă o procedură trebuie să aibă o anumită oră, [fixeaz-o](/app-interface/program/ghiduri/fixarea-vs-blocarea-orelor) înainte de generare.
+- **Generează:** poți limita procedurile, oaspeții și zilele. O procedură nerepartizată în ziua respectivă nu primește oră.
+- **Blochează după:** dacă vrei să păstrezi o oră deja plasată, [blocheaz-o](/app-interface/program/ghiduri/fixarea-vs-blocarea-orelor) înainte de o nouă generare.
 
-## Verificări suplimentare (ascunse implicit)
+Regenerarea înlocuiește programul generat automat, dar păstrează elementele blocate și cele adăugate manual. Pentru proceduri adăugate pe loc, folosește „Adaugă manual elemente în programul zilei”; acestea rămân la regenerare.
 
-- **Info: suprapuneri**: suprapuneri de oaspete, terapeut sau cameră în ziua curentă (durata este luată în calcul). Lista arată perechile în conflict. Pragul „Suprapuneri tolerate” este implicit 0.
-- **Procedurile oaspeților**: fiecare procedură din planul de terapie apare în programul oaspetelui („Neprogramate: Masaj, Bazin”).
-- **Program pentru zi**: ziua are program general; fără el nu se poate genera.
-
-## Vizualizări și instrumente
-
-- **Tabel oaspeți × ore**, **Carduri oaspeți**, **Cronologie** (activezi editarea pentru a reprograma prin tragere; editarea în cronologie este în beta).
-- **Conflicte între proceduri** și **Proceduri neprogramate**: filtre rapide.
-- **Istoric modificări**: ce s-a schimbat în ziua curentă, cu posibilitate de anulare.
-- **Șterge**: alegi ce ștergi din programul zilei: „Programul generat automat”, „Elementele adăugate manual”, „Elementele blocate” sau o singură coloană („Șterge coloana”).
-- **Setări vizualizare**: antetul coloanelor (numele procedurii sau ora), lățimea orei, abrevieri.
-
-## Reguli de reținut
-
-- Regenerarea **înlocuiește** programul generat automat al zilei, cu excepția elementelor blocate și a celor adăugate manual. Blochează înainte de a regenera.
-- Generarea rulează după repartizarea pe zile: o procedură nerepartizată în ziua curentă nu primește oră.
-- Camerele se repartizează separat, din pasul Terapeuți („Repartizare camere”), după regulile descrise la [Săli](/app-interface/program/configurare/camere).
-
-## Exemple
-
-- Masajul oaspetelui e pus la 09:00, imediat după kinetoterapia de la 08:00: regula „după, în aceeași zi”.
-- Cataplasma primește oră doar înainte de 12:00: fereastra de timp din configurare.
-- Ai regenerat ziua după ce ai mutat manual trei ore: dacă erau blocate, au rămas; dacă nu, au fost rescrise.
-
-<Tip>
-Folosește previzualizarea (tab „Configurare” → „Previzualizare”) ca să vezi ce ar rămâne neplasat și de ce, înainte de a scrie programul.
-</Tip>
-
-## Vezi și
-
-- [Ore fixate vs ore blocate](/app-interface/program/ghiduri/fixarea-vs-blocarea-orelor)
-- [Generarea programului: opțiuni, versiuni, previzualizare, rezultat](/app-interface/program/ghiduri/generare)
-- [De ce nu a fost plasată o procedură](/app-interface/program/depanare/proceduri-neplasate)
-- [Pasul 3 — Repartizare](/app-interface/program/sejur/pasul-3-repartizare)
+Pentru detalii despre rezultat și previzualizare, vezi [Generarea programului](/app-interface/program/ghiduri/generare). Camerele se repartizează separat, în pasul „Terapeuți”.

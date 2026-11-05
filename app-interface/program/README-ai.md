@@ -11,7 +11,8 @@ Paginile din acest folder sunt incluse în navigația din `mint.json`. Când ada
 ## Convenții pentru pagini noi sau modificate
 
 - Frontmatter cu `title` în română. Titlul spune direct ce explică pagina.
-- Prima linie: `**Unde:** … (/admin/...)`.
+- Prima linie: `**Unde:** …`, cu link direct la `https://teamm.work/admin/...` pentru rutele fixe.
+- Păstrează doar ce nu se vede direct în interfață: reguli, efecte, limite și consecințe. Nu enumera coloane, butoane, filtre sau mesaje de confirmare și nu repeta aceeași regulă în mai multe secțiuni.
 - Etichetele din interfață se citează exact, cu ghilimele românești „…".
 - Fără capturi de ecran: se învechesc, iar asistenții AI citesc textul.
 - Sursele textelor: fișierele `*.entity-info.ts`, `scheduling-config.tooltips.ts` și `schedule-verify.catalog.ts` / `.text.ts` din codul aplicației. Când se schimbă un text acolo, actualizează pagina corespunzătoare.

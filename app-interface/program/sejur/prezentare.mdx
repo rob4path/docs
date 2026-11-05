@@ -1,88 +1,15 @@
 ---
-title: "Program v2: pașii și bara „Verificări”"
+title: "Program v2 și verificările"
 ---
 
-**Unde:** meniul „Program” → „Program v2 ⚡️” ([`/admin/schedule/manage-v2`](https://teamm.work/admin/schedule/manage-v2)).
+**Unde:** [„Program v2”](https://teamm.work/admin/schedule/manage-v2).
 
-Pagina „Program v2” te conduce prin construirea programului unui sejur în patru pași, plus un tab de configurare. Sus alegi **sejurul** și **ziua** din calendar. Bara „Verificări” (jos sau lateral, după preferință) arată pentru pasul curent ce este deja în regulă, ce lipsește și ce ai de bifat manual.
-
-## Pașii
-
-| Pas | Ce faci |
-|---|---|
-| General | Pregătești programul general al zilei |
-| Terapeuți | Stabilești cine lucrează și când |
-| Repartizare | Distribui procedurile oaspeților pe zilele sejurului |
-| Oaspeți | Generezi și ajustezi orele zilei |
-| Configurare | Setezi regulile centrului |
-
-Fiecare pas are pagina lui: [Pasul 1 — General](/app-interface/program/sejur/pasul-1-general), [Pasul 2 — Terapeuți](/app-interface/program/sejur/pasul-2-terapeuti), [Pasul 3 — Repartizare](/app-interface/program/sejur/pasul-3-repartizare), [Pasul 4 — Oaspeți](/app-interface/program/sejur/pasul-4-oaspeti).
-
-Repartizarea acoperă tot sejurul. Poți alege o zi din calendar pentru a o inspecta, fără să limitezi repartizarea la acea zi.
+Alege sejurul, apoi lucrează în ordine: [General](/app-interface/program/sejur/pasul-1-general), [Terapeuți](/app-interface/program/sejur/pasul-2-terapeuti), [Repartizare](/app-interface/program/sejur/pasul-3-repartizare), [Oaspeți](/app-interface/program/sejur/pasul-4-oaspeti). Repartizarea privește întregul sejur, chiar dacă ai selectat o zi în calendar. Tab-ul „Configurare” conține regulile centrului.
 
 ## Bara „Verificări”
 
-Bara afișează, pentru tab-ul curent, o listă de **pași**. Fiecare pas este fie o verificare automată (ex. „Zile cu program”: 8 din 12 zile au program), fie o acțiune pe care o bifezi tu (ex. „Aplică șablon sejur”). Un pas poate fi verde (în regulă), roșu (eroare), galben (avertisment), gri (informativ) sau blocat.
+Verificările automate arată ce lipsește; pașii care nu se pot verifica automat se bifează manual. O bifă se aplică fie **întregului sejur**, fie **zilei alese**, după setarea pasului, și este vizibilă întregii echipe.
 
-- **Click pe pas** deschide acțiunea lui: șabloanele, bara de fixare a orelor, opțiunile de generare, dialogul de export etc. Pentru verificările cu listă (ex. oaspeți fără cameră), click deschide lista rândurilor.
-- **Iconița de informații** explică de ce contează pasul.
-- **Numărătoarea „N de făcut”** din bară numără doar pașii obligatorii neterminați.
-- **„Afișează ca bară jos” / „Afișează ca bară laterală”** schimbă poziția barei; alegerea se păstrează în browser.
+Un pas blocat depinde de un pas anterior. „Deblochează pașii” permite temporar continuarea, fără să rezolve cauza. Pașii opționali nu intră în numărul „de făcut”.
 
-### Bifarea manuală: pe zi sau pe tot sejurul
-
-Pașii care nu pot fi verificați automat se bifează manual. Fiecare are un domeniu:
-
-- **O dată pe sejur** („Bifează pasul pentru tot sejurul”): o bifă acoperă tot sejurul. Exemple: șabloane program, aplică șablon sejur, disponibilitate terapeuți, fixează ore la proceduri.
-- **Pe fiecare zi** („Bifează pasul pentru această zi”): se bifează separat pentru fiecare zi. Exemple: generează, blochează orele, adaugă manual, descarcă.
-- **Fără bifare**: pasul este doar informativ.
-
-<Info>
-Bifa este comună întregii echipe: dacă un coleg bifează „Descarcă” pentru ziua de marți, toți o văd bifată.
-</Info>
-
-### Pași blocați și dependențe
-
-Un pas poate depinde de altul. Până când dependența nu este în regulă, pasul apare **blocat** și arată de ce („blocat de: Program pentru zi”). Dependențele implicite sunt:
-
-| Pas | Depinde de |
-|---|---|
-| Terapeut, cameră, oră (oaspeți) | Program pentru zi |
-| Proceduri în program | Program pentru zi |
-| Repartizează pe zile | Proceduri în program |
-| Adaugă în programul oaspeților | Repartizează pe zile |
-
-Butonul „Deblochează pașii” din bară ridică temporar blocarea; „Reactivează blocarea pașilor” o pune la loc. Un pas dezactivat din configurare nu blochează niciodată nimic.
-
-### Pași opționali și pași ascunși
-
-- Pașii **opționali** („nice to have”, ex. „Fixează orele anumitor proceduri (opțional)”) se afișează și se pot bifa, dar nu intră în numărătoarea „de făcut”.
-- Unii pași sunt **ascunși implicit** (ex. „Procedurile oaspeților”, „Info: suprapuneri”, „Program pentru zi”) și pot fi activați din configurare.
-
-## Personalizarea barei
-
-Din tab-ul „Configurare” → secțiunea „Pași de verificare” poți:
-
-- alege ce pași predefiniți se afișează, pe ce tab și în ce ordine (trage pașii pentru a-i rearanja);
-- redenumi un pas și schimba explicația lui;
-- seta praguri (ex. „Zile minime cu program”: 8 din 12);
-- marca un pas ca opțional sau schimba domeniul de bifare;
-- schimba dependențele unui pas (lista aleasă înlocuiește lista implicită);
-- adăuga pași proprii cu text liber (ex. „Confirmă meniul cu bucătăria”), care se deschid într-un dialog la click.
-
-Lista completă a pașilor, cu domeniile și pragurile lor, este în [Lista pașilor de verificare](/app-interface/program/referinta/verificari).
-
-<Warning>
-Tab-ul „Configurare” are modificări nesalvate cât timp editezi. La părăsirea paginii primești un avertisment; bara arată „Configurarea are modificări nesalvate”.
-</Warning>
-
-## Alte elemente ale paginii
-
-- **Notițe**: butonul din antet deschide notițele pe zi și notițele generale ale centrului. Vezi [Notițe](/app-interface/program/ghiduri/notite).
-- **Duplicare program general**: din pasul General, „Se va duplica programul general” din ziua aleasă în zilele bifate. Vezi [Pasul 1 — General](/app-interface/program/sejur/pasul-1-general).
-- **Descarcă**: dialogul de export este disponibil pe pașii Terapeuți și Oaspeți. Vezi [Descarcă programul](/app-interface/program/ghiduri/descarca-programul).
-
-## Vezi și
-
-- [Cum se construiește programul](/app-interface/program/introducere)
-- [Lista pașilor de verificare](/app-interface/program/referinta/verificari)
+Poți schimba ordinea, domeniul bifării, pragurile și dependențele din „Configurare” → „Pași de verificare”. Vezi [lista pașilor și regulile lor](/app-interface/program/referinta/verificari).

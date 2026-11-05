@@ -2,85 +2,22 @@
 title: "Generarea programului oaspeților"
 ---
 
-**Unde:** „Program v2” → tab „Oaspeți” → butonul „Generează” ([`/admin/schedule/manage-v2`](https://teamm.work/admin/schedule/manage-v2)). Previzualizarea: tab „Configurare” → „Previzualizare (simulare)”.
+**Unde:** [„Program v2” → „Oaspeți” → „Generează”](https://teamm.work/admin/schedule/manage-v2).
 
-Generatorul dă ore, pentru ziua aleasă, tuturor procedurilor repartizate în acea zi. Îl pornești din „Generează”, alegi pentru ce proceduri, oaspeți și zile rulează, confirmi, iar la final primești un dialog de rezultat cu ce a fost programat și ce nu a încăput. Elementele blocate (🔒) și cele adăugate manual nu sunt atinse de regenerare. Program v2 folosește generatorul V4, care aplică regulile active ale centrului.
+Generatorul dă ore procedurilor repartizate în zilele alese. Poți limita rularea la anumite proceduri sau anumiți oaspeți. Fără program general pentru zi, nu se poate genera nimic.
 
-<Info>
-Butonul „Generează” (scurtătură `G`) este ascuns când ziua nu are program general: fără program general nu se poate genera nimic.
-</Info>
+**Regenerarea înlocuiește programările generate automat** din zilele selectate. Elementele blocate și cele adăugate manual rămân. Dacă planul terapeutic s-a schimbat, programările rămase fără plan sunt eliminate și raportate.
 
-## Rularea generării
+## Cum citești rezultatul
 
-<Steps>
-  <Step title="Deschide „Opțiuni de generare”">
-    Descrierea dialogului: „Alege pentru ce proceduri, oaspeți și zile să se genereze programul.”
-    - „Proceduri”: implicit „Toate procedurile”; „Lasă gol pentru a genera pentru toate procedurile.” („Golește” revine la toate).
-    - „Oaspeți”: implicit „Toți oaspeții”; „Lasă gol pentru a genera pentru toți oaspeții.”
-    - „Zile”: implicit se generează pentru ziua afișată; poți selecta exact zilele dorite, inclusiv numai ziua de mâine.
-    Butoane: „Anulează” / „Generează” (Enter).
-  </Step>
-  <Step title="Confirmă">
-    Dacă ziua are deja program, titlul este „Regenerează programul”, cu mesajul „Aceasta va regenera programul «tuturor oaspeților | oaspeților selectați (N)» «pentru această zi | pentru N zile». Elementele blocate (🔒) se păstrează, restul programului generat automat va fi înlocuit.” Prima dată: „Generează programul” / „Aceasta va genera programul …”.
-    <Note>
-    Tot aici apar bifele pentru **zilele speciale**, câte una pentru fiecare regulă care cade pe o zi generată: „«Etichetă | Zi scurtă» (DD.MM): proceduri de max. N min (Individuală, Colectivă)”. Sunt bifate implicit, cu excepția regulilor marcate ca opționale în „Configurare programare”. Debifezi dacă nu vrei scurtarea în acea zi.
-    </Note>
-  </Step>
-  <Step title="Așteaptă">
-    Suprapunerea „Generăm orarul” trece prin „Pregătim orarul oaspeților”, „Potrivim terapeuți și camere”, „Optimizăm intervalele”, „Finalizăm programul” (în tab-ul Repartizare: „Construim repartizarea”).
-  </Step>
-  <Step title="Citește rezultatul">
-    Confirmarea este „Programul a fost generat cu succes”. Dacă au fost probleme, butonul „Vezi erorile apărute în urma generării.” pulsează și deschide dialogul de rezultat (vezi mai jos). Îl poți redeschide oricând din tab-ul „Repartizare” → meniul „Ultima generare” (tooltip „Vezi detaliile ultimei generări de program”).
-  </Step>
-</Steps>
+- **Neprogramate:** procedurile nu au găsit loc nici în ziua planificată, nici în altă zi; trebuie rezolvate manual sau prin schimbarea regulilor ori a disponibilității.
+- **Mutate în altă zi:** au fost programate, dar nu în ziua preferată.
+- **Peste norma terapeutului:** sunt programate, dar terapeutul depășește plafonul zilnic.
 
-## Ce face serverul la generare
+Rezultatul ultimei rulări rămâne în „Ultima generare”. Vezi [de ce nu a fost plasată o procedură](/app-interface/program/depanare/proceduri-neplasate) pentru verificările utile.
 
-- Planurile care au deja program în ziua respectivă sunt sărite (nu sunt dublate).
-- V4 copiază pe ziua generată programările blocate (🔒) din zilele anterioare.
-- Curățarea orfanilor: programările al căror plan nu mai există sunt șterse și raportate ca „«Procedură» a fost șters pentru «Oaspete» în ziua «…» pentru că nu mai apare în planul terapeutic curent”.
+## Previzualizare și adăugare manuală
 
-## Dialogul de rezultat
+„Configurare” → „Previzualizare” simulează generarea unei singure zile fără să salveze. Cotele și zilele permise se aplică la repartizarea pe zile, deci efectul lor nu se vede aici.
 
-Titlu: „Programul a fost generat cu succes!” sau „Erori la generarea programului”. Cardurile „Proceduri programate” și „Oaspeți programați” dau totalurile. Secțiunea „Atenționări (N)” are un rezumat de forma „N atenționări — M proceduri nu au putut fi programate; restul au fost programate, unele în altă zi.” sau „… — toate procedurile au fost programate, unele în altă zi decât cea planificată.” Peste 15 rânduri apare filtrul „Caută după oaspete sau procedură...”.
-
-| Grup | Explicația din dialog |
-|---|---|
-| Neprogramate | „Nu a mai fost loc nici în ziua planificată, nici în altă zi — aceste proceduri lipsesc din program și trebuie adăugate manual.” |
-| Peste norma terapeutului | „Procedurile au fost programate, dar terapeutul depășește numărul maxim de proceduri pe zi.” |
-| Mutate în altă zi | „Ziua sau ora preferată era ocupată, așa că procedura a fost programată în altă zi. Nu se pierde nimic din plan.” |
-| Alte atenționări | Orice altceva semnalat de generator. |
-
-Fiecare rând are o notă cu motivul, de exemplu „ora 09:00 era ocupată în ziua planificată”, „toate locurile din zi erau ocupate (capacitate 4) și nicio altă zi nu avea loc liber”, „terapeutul Maria depășește norma zilnică pentru această procedură”. „Pași următori”: „Revizuiește programul generat în tabelul de mai jos”, „Fă ajustări manuale dacă este necesar”. Închizi cu „Înțeles”.
-
-## Previzualizare (simulare)
-
-În tab-ul „Configurare” → „Previzualizare (simulare)”: alegi „Sejur” și „Dată”, apoi „Previzualizare”. Rezultatul: „S-ar programa N programări, M neprogramate.” Nu se scrie nimic în program; arată rezultatul pentru o singură zi.
-
-<Warning>
-Cotele, seed-urile și zilele permise se aplică la repartizare, nu la punerea orelor, așa că efectul lor nu se vede în previzualizare.
-</Warning>
-
-## Șterge programul zilei
-
-Butonul „Șterge” din tab-ul „Oaspeți” deschide „Șterge programul” / „Alege ce să ștergi din programul acestei zile:” cu bifele „Programul generat automat” (bifată implicit), „Elementele adăugate manual”, „Elementele blocate”. Confirmarea: „Au fost șterse: …”.
-
-## Adaugă manual elemente în program
-
-Din bara „Instrumente” a tab-ului „Oaspeți” → „Adaugă manual elemente în programul zilei”. Secțiunea „Ora procedurii” are trei moduri: „Ora deja setată a fiecărui oaspete”, „Generează automat”, „La o oră fixă” (tooltip: „Alege cum se stabilește ora: o oră fixă pentru toți, ora deja setată a fiecărui oaspete, sau generată automat în primul interval liber din programul general al zilei, ținând cont de orele deja ocupate.”). La consultații ai „Medic (opțional — toți la același medic)”, cu placeholder „Repartizează automat” și opțiunea „Medicul deja atribuit al fiecărui oaspete”.
-
-„Generează automat” rulează V4 în simulare și inserează rezultatul ca intrări **manuale**, aditive, pe care regenerarea nu le atinge. Confirmări: „N programări adăugate”, respectiv „N proceduri neprogramate (fără interval liber): …”.
-
-## Reguli de reținut
-
-- Regenerarea înlocuiește programul generat automat al zilei; elementele blocate și cele adăugate manual rămân. Blochează înainte de a regenera.
-- Generarea rulează după repartizarea pe zile: o procedură nerepartizată în ziua curentă nu primește oră.
-- Fără program general în zi, butonul „Generează” nu apare.
-- Rezultatul ultimei generări rămâne disponibil în „Ultima generare”.
-
-## Vezi și
-
-- [Pasul 4 — Oaspeți: generează orarul zilei](/app-interface/program/sejur/pasul-4-oaspeti)
-- [Ore fixate vs ore blocate](/app-interface/program/ghiduri/fixarea-vs-blocarea-orelor)
-- [De ce nu a fost plasată o procedură](/app-interface/program/depanare/proceduri-neplasate)
-- [Configurare: faze, cote, capacitate](/app-interface/program/referinta/configurare-faze-cote-capacitate)
+„Adaugă manual elemente în programul zilei” permite o oră fixă, ora oaspetelui sau primul interval liber. Intrările rămân manuale chiar dacă ora a fost găsită automat; regenerarea nu le șterge.
